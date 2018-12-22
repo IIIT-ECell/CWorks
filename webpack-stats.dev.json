@@ -1,0 +1,1 @@
+{"status":"error","publicPath":"http://localhost:3000/","error":"ModuleNotFoundError","message":"Module not found: Error: Can't resolve 'redux-thunk' in '/home/zubair/Documents/Acads/SSAD13/src/smile/frontend/src'"}
