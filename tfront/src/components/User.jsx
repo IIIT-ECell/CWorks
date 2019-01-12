@@ -37,20 +37,18 @@ class User extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({isLoggedIn: nextProps.getMark,});
-    this.state.key = nextProps.getKey;
+    this.setState({isLoggedIn: nextProps.getMark, key: nextProps.getKey});
     console.log('Props received at Login');
     console.log(this.state);
   }
 
   componentWillMount() {
-    this.state.isLoggedIn = this.props.getMark;
-    this.state.key = this.props.getKey;
+    this.setState({isLoggedIn: this.props.getMark, key: this.props.getKey});
     console.log(this.state);
   }
 
   componentDidMount() {
-    this.state.uid = this.props.match.params;
+    this.setState({uid: this.props.match.params});
     console.log(this.state.uid);
     this.getDetails();
   }
