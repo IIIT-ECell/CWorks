@@ -12,6 +12,7 @@ import Register from './components/Register';
 import Logout from './components/Logout';
 import User from './components/User';
 import Profile from './components/Profile';
+import CreateStudent from './components/CreateStudent';
 
 // import logo from './logo.svg';
 import './App.css';
@@ -71,10 +72,12 @@ class App extends Component {
                 <Route exact path='/' render={(props) => <Login {...props} setKey={k=>{this.loginKey(k)}} setMark={p=>{this.loginMarker(p)}} getKey={this.state.key} getMark={this.state.isLoggedIn} />} />
                 <Route exact path='/login' render={(props) => <Login {...props} setKey={k=>{this.loginKey(k)}} setMark={p=>{this.loginMarker(p)}} getKey={this.state.key} getMark={this.state.isLoggedIn} />} />
                 <Route exact path='/register' render={(props) => <Register {...props} setKey={k=>{this.loginKey(k)}} setMark={p=>{this.loginMarker(p)}} getKey={this.state.key} getMark={this.state.isLoggedIn} />} />
+                <Route exact path='/register/student' render={(props) => <CreateStudent {...props} setKey={k=>{this.loginKey(k)}} setMark={p=>{this.loginMarker(p)}} getKey={this.state.key} getMark={this.state.isLoggedIn} />} />
                 <Route exact path='/home' render={(props) => <Home {...props} setKey={k=>{this.loginKey(k)}} setMark={p=>{this.loginMarker(p)}} getKey={this.state.key} getMark={this.state.isLoggedIn} />} />
                 <Route exact path='/profile' render={(props) => <Profile {...props} setKey={k=>{this.loginKey(k)}} setMark={p=>{this.loginMarker(p)}} getKey={this.state.key} getMark={this.state.isLoggedIn} />} />
                 <Route exact path='/user/:id' render={(props) => <User {...props} setKey={k=>{this.loginKey(k)}} setMark={p=>{this.loginMarker(p)}} getKey={this.state.key} getMark={this.state.isLoggedIn} />} />
                 <Route exact path='/logout' render={(props) => <Logout {...props} setKey={k=>{this.loginKey(k)}} setMark={p=>{this.loginMarker(p)}} getKey={this.state.key} getMark={this.state.isLoggedIn} />} />
+
               </Switch>
             </div>
           </div>
