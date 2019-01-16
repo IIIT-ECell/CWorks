@@ -16,12 +16,9 @@ import CreateStudent from './components/CreateStudent';
 
 // import logo from './logo.svg';
 import './App.css';
+import CreateCompany from './components/CreateCompany';
 
 class App extends Component {
-
-  constructor() {
-    super();
-  }
   render() {
     return (
       <div className="App">
@@ -46,6 +43,7 @@ class App extends Component {
                 <Route exact path='/login' component={Login} />
                 <Route exact path='/register' component={Register} />
                 <Route exact path='/register/student' component={CreateStudent} />
+                <Route exact path='/register/company' component={CreateCompany} />
                 <Route exact path='/home' component={Home} />
                 <Route exact path='/profile' component={Profile} />
                 <Route exact path='/user/:id'  component={User} />

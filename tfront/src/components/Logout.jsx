@@ -36,7 +36,7 @@ class Login extends Component {
   }
 
   render() {
-    if (sessionStorage["isLoggedIn"]=="false") {
+    if (sessionStorage["isLoggedIn"]==="false") {
       return <Redirect to="/home" />
     }
     return (
