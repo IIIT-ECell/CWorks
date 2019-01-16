@@ -9,12 +9,16 @@ Uses React and Django. SPA.
 ## Testing locally
 Prerequisites: `Python` and `Node (with npm and nvm)` installed
 
+[Using node v10.15.0 (npm v6.4.1)]
+
 Assumption: You're using proper package management with virtual environments where necessary
 
 1. Fork and clone the repository. For solely local testing, just cloning will do.
-2. `cd` into the cloned repo and install python dependencies
+2. `cd` into the cloned repo and install python dependencies, and setup migrations
 ```
 pip install -r requirements.txt
+python manage.py makemigrations
+python manage.py migrate
 ```
 3. Install npm dependencies
 ```
@@ -44,9 +48,9 @@ https://musescore.org/en/handbook/developers-handbook/finding-your-way-around/gi
 #### Summary
 
 1. Fork on GitHub (click Fork button) (if you don't have master access)
-2. Clone to computer, preferably use SSH URL (`git clone git@github.com:you/MuseScore.git`)
-3. Don't forget to cd into your repo: (`cd MuseScore/`)
-4. Set up remote upstream (`git remote add upstream git://github.com/musescore/MuseScore.git`) (for forks)
+2. Clone to computer, preferably use SSH URL (`git clone git@github.com:<you>/CWorks.git`)
+3. Don't forget to cd into your repo: (`cd CWorks/`)
+4. Set up remote upstream (`git remote add upstream git@github.com:IIIT-ECell/CWorks.git`) (for forks)
 5. Create a branch for new issue (`git checkout -b 404-new-feature`)
 6. Develop on issue branch. [Time passes, the main MuseScore repository accumulates new commits]
 7. Commit changes to your local issue branch. (`git add . ; git commit -m 'commit message'`)
