@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
-import { Redirect, Link } from 'react-router-dom';
-
-import User from './User';
-
-import axios from 'axios';
+import { Redirect } from 'react-router-dom';
 
 import "../styles/home.css";
 
@@ -19,7 +15,7 @@ class Home extends Component {
   }
 
   render() {
-    if (sessionStorage["isLoggedIn"]=="false") {
+    if (sessionStorage["isLoggedIn"]==="false") {
       return <Redirect to="/login" />
     }
 

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
 
-import "../styles/login.css";
+import "../styles/register.css";
 
 class Register extends Component {
   render() {

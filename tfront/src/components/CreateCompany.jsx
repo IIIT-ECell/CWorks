@@ -87,7 +87,7 @@ class CreateCompany extends Component {
 		return (
 			<form onSubmit={this.handleSubmit} className="form-signin">
 				<div className="form-group">
-					<img className="logoimg" src={logoUrl} />
+					<img className="logoimg" src={logoUrl} alt="placeholder logo" />
 				</div>
 				<div className="form-group">
 					<input className="form-control" placeholder="Username" type="text" id="username" name="username" onChange={this.handleInput} />
