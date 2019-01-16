@@ -75,6 +75,7 @@ class CreateStudent extends Component {
 										sessionStorage["isLoggedIn"] = true;
 										sessionStorage["user_id"] = response.data.user_id;
 									}
+									window.location.reload();
 								})
 						})
 				}
@@ -94,7 +95,7 @@ class CreateStudent extends Component {
 		return (
 			<form onSubmit={this.handleSubmit} className="form-signin">
 				<div className="form-group">
-					<img className="logoimg" src={logoUrl} />
+					<img className="logoimg" src={logoUrl} alt="placeholder logo" />
 				</div>
 				<div className="form-group">
 					<input className="form-control" placeholder="Username" type="text" id="username" name="username" onChange={this.handleInput} />
@@ -112,7 +113,7 @@ class CreateStudent extends Component {
 					<input className="form-control" placeholder="Student Id" type="number" id="student_id" name="student_id" onChange={this.handleInput} />
 				</div>
 				<div className="form-group">
-					<select class="form-control" name="gender" id="gender" onChange={this.handleInput}>
+					<select className="form-control" name="gender" id="gender" onChange={this.handleInput}>
 						<option value="M" selected="">Male</option>
 						<option value="F">Female</option>
 						<option value="O">Other</option>
@@ -126,7 +127,7 @@ class CreateStudent extends Component {
 					<input className="form-control" placeholder="Nationality" type="text" id="nationality" name="nationality" onChange={this.handleInput} />
 				</div>
 				<div className="form-group">
-					<select class="form-control" name="year_of_study" id="year_of_study" onChange={this.handleInput}>
+					<select className="form-control" name="year_of_study" id="year_of_study" onChange={this.handleInput}>
 						<option value="1" selected="">First Year Undergrad</option>
 						<option value="2">Second Year Undergrad</option>
 						<option value="3">Third Year Undergrad</option>
