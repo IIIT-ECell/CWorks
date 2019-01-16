@@ -9,10 +9,6 @@ class Login extends Component {
 
   constructor() {
     super();
-    this.state = {
-      isLoggedIn: false,
-      key: "",
-    };
 
     this.formData = {
       email: "",
@@ -24,17 +20,6 @@ class Login extends Component {
     this.handleEmail = this.handleEmail.bind(this)
     this.handlePassword = this.handlePassword.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.setState({isLoggedIn: nextProps.getMark, key: nextProps.getKey});    
-    console.log('Props received at Login');
-    console.log(this.state);
-  }
-
-  componentWillMount() {
-    this.setState({isLoggedIn: this.props.getMark, key: this.props.getKey});
-    console.log(this.state);
   }
 
   handleUsername(event) {
@@ -71,16 +56,10 @@ class Login extends Component {
       .then( response => {
         if (response.status >= 200 && response.status < 206) {
           console.log(response.data.key);
-          // this.props.route.marklogin();
-          this.props.setMark(true);
-          this.props.setKey(response.data.key);
-          let appState = {
-            isLoggedIn: this.props.getMark,
-            key: this.props.getKey,
-          };
-          localStorage["appState"] = JSON.stringify(appState);
-          console.log("While logging in:")
-          console.log(appState);
+          sessionStorage["isLoggedIn"] = true;
+          sessionStorage["user_key"] = response.data.key;
+          console.log("While logging in:");
+          window.location.reload();
         }
       })
       .catch( response => {
@@ -91,7 +70,7 @@ class Login extends Component {
   }
 
   render() {
-    if (this.props.getKey) {
+    if (sessionStorage["isLoggedIn"]=="true"){
       return <Redirect to="/home" />
     }
     const logoUrl = require(`../images/f81.jpeg`)

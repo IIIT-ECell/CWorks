@@ -21,34 +21,7 @@ class App extends Component {
 
   constructor() {
     super();
-    this.state = {
-      isLoggedIn: false,
-      key: "",
-    };
   }
-
-  componentDidMount() {
-    let state = localStorage["appState"];
-    if (state) {
-      console.log('Read from localStorage');
-      let AppState = JSON.parse(state);
-      console.log(AppState);
-      this.setState({isLoggedIn: AppState.isLoggedIn, user: AppState.user});
-    }
-  }
-
-  loginMarker = (p) => {
-    this.setState({
-      isLoggedIn: p,
-    });
-  }
-
-  loginKey = (k) => {
-    this.setState({
-      key: k,
-    })
-  }
-
   render() {
     return (
       <div className="App">
@@ -69,14 +42,14 @@ class App extends Component {
             </nav>
             <div className="container">
               <Switch>
-                <Route exact path='/' render={(props) => <Login {...props} setKey={k=>{this.loginKey(k)}} setMark={p=>{this.loginMarker(p)}} getKey={this.state.key} getMark={this.state.isLoggedIn} />} />
-                <Route exact path='/login' render={(props) => <Login {...props} setKey={k=>{this.loginKey(k)}} setMark={p=>{this.loginMarker(p)}} getKey={this.state.key} getMark={this.state.isLoggedIn} />} />
-                <Route exact path='/register' render={(props) => <Register {...props} setKey={k=>{this.loginKey(k)}} setMark={p=>{this.loginMarker(p)}} getKey={this.state.key} getMark={this.state.isLoggedIn} />} />
-                <Route exact path='/register/student' render={(props) => <CreateStudent {...props} setKey={k=>{this.loginKey(k)}} setMark={p=>{this.loginMarker(p)}} getKey={this.state.key} getMark={this.state.isLoggedIn} />} />
-                <Route exact path='/home' render={(props) => <Home {...props} setKey={k=>{this.loginKey(k)}} setMark={p=>{this.loginMarker(p)}} getKey={this.state.key} getMark={this.state.isLoggedIn} />} />
-                <Route exact path='/profile' render={(props) => <Profile {...props} setKey={k=>{this.loginKey(k)}} setMark={p=>{this.loginMarker(p)}} getKey={this.state.key} getMark={this.state.isLoggedIn} />} />
-                <Route exact path='/user/:id' render={(props) => <User {...props} setKey={k=>{this.loginKey(k)}} setMark={p=>{this.loginMarker(p)}} getKey={this.state.key} getMark={this.state.isLoggedIn} />} />
-                <Route exact path='/logout' render={(props) => <Logout {...props} setKey={k=>{this.loginKey(k)}} setMark={p=>{this.loginMarker(p)}} getKey={this.state.key} getMark={this.state.isLoggedIn} />} />
+                <Route exact path='/' component={Login} />
+                <Route exact path='/login' component={Login} />
+                <Route exact path='/register' component={Register} />
+                <Route exact path='/register/student' component={CreateStudent} />
+                <Route exact path='/home' component={Home} />
+                <Route exact path='/profile' component={Profile} />
+                <Route exact path='/user/:id'  component={User} />
+                <Route exact path='/logout'  component={Logout} />
 
               </Switch>
             </div>
