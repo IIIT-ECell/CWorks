@@ -5,19 +5,13 @@ import axios from 'axios';
 
 import "../styles/login.css";
 
-class CreateStudent extends Component {
+class CreateCompany extends Component {
 
 	constructor() {
 		super();
 
-		this.formData = {
-			student_id: 0,
-			gender: "",
-			permanent_city_res: "",
-			nationality: "",
-			year_of_study: "",
-		};
-
+        this.formData = {};
+        
 		this.handleInput = this.handleInput.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
@@ -59,13 +53,11 @@ class CreateStudent extends Component {
 							console.log(response.data.pk);
 							axios({
 								method: 'POST',
-								url: "http://localhost:8000/api/users/students/",
+								url: "http://localhost:8000/api/users/companies/",
 								data: {
-									student_id: this.formData.student_id,
-									gender: this.formData.gender,
-									permanent_city_res: this.formData.permanent_city_res,
-									nationality: this.formData.nationality,
-									year_of_study: this.formData.year_of_study,
+									company_id: this.formData.company_id,
+                                    about: this.formData.about,
+									additional_poc: this.formData.additional_poc,
 									user: response.data.pk,
 								}
 							})
@@ -74,7 +66,8 @@ class CreateStudent extends Component {
 									if (response.status >= 200 && response.status < 206) {
 										sessionStorage["isLoggedIn"] = true;
 										sessionStorage["user_id"] = response.data.user_id;
-									}
+                                    }
+                                    window.location.reload();
 								})
 						})
 				}
@@ -109,30 +102,13 @@ class CreateStudent extends Component {
 					<input className="form-control" placeholder="Verify Password" type="password" id="password2" name="password2" onChange={this.handleInput} />
 				</div>
 				<div className="form-group">
-					<input className="form-control" placeholder="Student Id" type="number" id="student_id" name="student_id" onChange={this.handleInput} />
+					<input className="form-control" placeholder="Company Id" type="text" id="company_id" name="company_id" onChange={this.handleInput} />
 				</div>
 				<div className="form-group">
-					<select class="form-control" name="gender" id="gender" onChange={this.handleInput}>
-						<option value="M" selected="">Male</option>
-						<option value="F">Female</option>
-						<option value="O">Other</option>
-						<option value="N">Prefer not to say</option>
-					</select>
+                    <input className="form-control" placeholder="About Company" type="text" id="about" name="about" onChange={this.handleInput} />
 				</div>
 				<div className="form-group">
-					<input className="form-control" placeholder="Permanent City" type="text" id="permanent_city_res" name="permanent_city_res" onChange={this.handleInput} />
-				</div>
-				<div className="form-group">
-					<input className="form-control" placeholder="Nationality" type="text" id="nationality" name="nationality" onChange={this.handleInput} />
-				</div>
-				<div className="form-group">
-					<select class="form-control" name="year_of_study" id="year_of_study" onChange={this.handleInput}>
-						<option value="1" selected="">First Year Undergrad</option>
-						<option value="2">Second Year Undergrad</option>
-						<option value="3">Third Year Undergrad</option>
-						<option value="4">Fourth Year Undergrad</option>
-						<option value="5">Postgrads (5th year DD, PG+))</option>
-					</select>
+					<input className="form-control" placeholder="Additional POC" type="text" id="additional_poc" name="additional_poc" onChange={this.handleInput} />
 				</div>
 				<div className="form-group">
 					<button className="btn btn-primary" id="loginbutton" type="submit">Register</button>
@@ -142,4 +118,4 @@ class CreateStudent extends Component {
 	}
 }
 
-export default CreateStudent;
+export default CreateCompany;
