@@ -7,23 +7,7 @@ class Login extends Component {
 
   constructor() {
     super();
-    this.state = {
-      isLoggedIn: false,
-      key: "",
-    };
-
     this.handleSubmit = this.handleSubmit.bind(this)
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.setState({isLoggedIn: nextProps.getMark, key: nextProps.getKey});
-    console.log('Props received at Login');
-    console.log(this.state);
-  }
-
-  componentWillMount() {
-    this.setState({ isLoggedIn: this.props.getMark, key: this.props.getKey });
-    console.log(this.state);
   }
 
   handleSubmit(event) {
@@ -38,15 +22,10 @@ class Login extends Component {
       .then( response => {
         if (response.status >= 200 && response.status < 206) {
           console.log(response.detail);
-          this.props.setMark(false);
-          this.props.setKey("");
-          let appState = {
-            isLoggedIn: this.props.getMark,
-            key: this.props.getKey,
-          };
-          localStorage["appState"] = JSON.stringify(appState);
-          console.log("While logging out:")
-          console.log(appState);
+          sessionStorage["user_key"] = "";
+          sessionStorage["isLoggedIn"] = false;
+          console.log("While logging out:");
+          window.location.reload();
         }
       })
       .catch( response => {
@@ -57,7 +36,7 @@ class Login extends Component {
   }
 
   render() {
-    if (!this.props.getKey) {
+    if (sessionStorage["isLoggedIn"]=="false") {
       return <Redirect to="/home" />
     }
     return (

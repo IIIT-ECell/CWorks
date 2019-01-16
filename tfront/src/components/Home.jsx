@@ -12,32 +12,14 @@ class Home extends Component {
   constructor() {
     super();
     this.state = {
-      isLoggedIn: false,
-      key: "",
       questions: [],
       q: [],
       replyView: false,
     };
   }
 
-
-  componentWillReceiveProps(nextProps) {
-    this.setState({isLoggedIn: nextProps.getMark, key: nextProps.getKey});
-    console.log('Props received at Login');
-    console.log(this.state);
-  }
-
-  componentWillMount() {
-    this.setState({isLoggedIn: this.props.getMark, key: this.props.getKey});
-    console.log(this.state);
-  }
-
-  componentDidMount() {
-
-  }
-
   render() {
-    if (!this.props.getKey) {
+    if (sessionStorage["isLoggedIn"]=="false") {
       return <Redirect to="/login" />
     }
 

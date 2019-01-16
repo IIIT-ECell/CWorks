@@ -36,14 +36,8 @@ class User extends Component {
     })
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.setState({isLoggedIn: nextProps.getMark, key: nextProps.getKey});
-    console.log('Props received at Login');
-    console.log(this.state);
-  }
-
   componentWillMount() {
-    this.setState({isLoggedIn: this.props.getMark, key: this.props.getKey});
+    this.setState({isLoggedIn: sessionStorage["isLoggedIn"], key: sessionStorage["key"]});
     console.log(this.state);
   }
 
