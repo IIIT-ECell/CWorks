@@ -29,7 +29,8 @@ class CreateCompany extends Component {
 		fd1.append("email", this.formData.email);
 		fd1.append("password1", this.formData.password1);
 		fd1.append("password2", this.formData.password2);
-
+    fd1.append("user_type", 2);
+    
 		axios
 			.post(
 				"http://localhost:8000/api/rest-auth/registration/",
@@ -68,7 +69,20 @@ class CreateCompany extends Component {
 										sessionStorage["user_id"] = response.data.user_id;
                                     }
                                     window.location.reload();
-								})
+                })
+              axios({
+                method:"PUT",
+                url: "http://localhost:8000/api/users/users/"+response.data.pk+"/",
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                data: {
+                  id: response.data.pk,
+                  user_type: 2,
+                  name: this.formData.name,
+                  phone_number: this.formData.phone_number,
+                }
+              })
 						})
 				}
 			})
@@ -104,8 +118,14 @@ class CreateCompany extends Component {
 				<div className="form-group">
 					<input className="form-control" placeholder="Company Id" type="text" id="company_id" name="company_id" onChange={this.handleInput} />
 				</div>
+        <div className="form-group">
+					<input className="form-control" placeholder="Company Name" type="text" id="name" name="name" onChange={this.handleInput} />
+				</div>
 				<div className="form-group">
-                    <input className="form-control" placeholder="About Company" type="text" id="about" name="about" onChange={this.handleInput} />
+          <input className="form-control" placeholder="About Company" type="text" id="about" name="about" onChange={this.handleInput} />
+				</div>
+        <div className="form-group">
+					<input className="form-control" placeholder="POC Phone Number" type="text" id="phone_number" name="phone_number" onChange={this.handleInput} />
 				</div>
 				<div className="form-group">
 					<input className="form-control" placeholder="Additional POC" type="text" id="additional_poc" name="additional_poc" onChange={this.handleInput} />
