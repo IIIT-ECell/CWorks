@@ -35,7 +35,7 @@ class CreateStudent extends Component {
 		fd1.append("email", this.formData.email);
 		fd1.append("password1", this.formData.password1);
 		fd1.append("password2", this.formData.password2);
-
+		fd1.append("user_type", 1);
 		axios
 			.post(
 				"http://localhost:8000/api/rest-auth/registration/",
@@ -69,14 +69,27 @@ class CreateStudent extends Component {
 									user: response.data.pk,
 								}
 							})
-								.then(response => {
-									console.log(response);
-									if (response.status >= 200 && response.status < 206) {
-										sessionStorage["isLoggedIn"] = true;
-										sessionStorage["user_id"] = response.data.user_id;
-									}
-									window.location.reload();
-								})
+							.then(response => {
+								console.log(response);
+								if (response.status >= 200 && response.status < 206) {
+									sessionStorage["isLoggedIn"] = true;
+									sessionStorage["user_id"] = response.data.user_id;
+								}
+								window.location.reload();
+							})
+							axios({
+								method:"PUT",
+								url: "http://localhost:8000/api/users/users/"+response.data.pk+"/",
+								headers: {
+									'Content-Type': 'application/json',
+								},
+								data: {
+									id: response.data.pk,
+									user_type: 1,
+									name: this.formData.name,
+									phone_number: this.formData.phone_number,
+								}
+							})
 						})
 				}
 			})
@@ -111,6 +124,12 @@ class CreateStudent extends Component {
 				</div>
 				<div className="form-group">
 					<input className="form-control" placeholder="Student Id" type="number" id="student_id" name="student_id" onChange={this.handleInput} />
+				</div>
+				<div className="form-group">
+					<input className="form-control" placeholder="Name" type="text" id="name" name="name" onChange={this.handleInput} />
+				</div>
+        <div className="form-group">
+					<input className="form-control" placeholder="Phone Number" type="text" id="phone_number" name="phone_number" onChange={this.handleInput} />
 				</div>
 				<div className="form-group">
 					<select className="form-control" name="gender" id="gender" onChange={this.handleInput}>
