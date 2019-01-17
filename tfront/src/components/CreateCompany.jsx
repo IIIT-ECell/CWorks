@@ -23,73 +23,77 @@ class CreateCompany extends Component {
 
 	handleSubmit(event) {
 		event.preventDefault();
-		console.log(this.formData);
-		let fd1 = new FormData();
-		fd1.append("username", this.formData.username);
-		fd1.append("email", this.formData.email);
-		fd1.append("password1", this.formData.password1);
-		fd1.append("password2", this.formData.password2);
-    fd1.append("user_type", 2);
-    
-		axios
-			.post(
-				"http://localhost:8000/api/rest-auth/registration/",
-				fd1
-			)
-			.then(response => {
-				console.log(response);
-				if (response.status >= 200 && response.status < 206) {
-					console.log(response.data.key);
-					sessionStorage["user_key"]=response.data.key;
-					axios({
-							method: "GET",
-							url: "http://localhost:8000/api/rest-auth/user",
-							headers: {
-								'Content-Type': 'application/json',
-								'Authorization': 'Token ' + response.data.key
+		// console.log(this.formData);
+		// let fd1 = new FormData();
+		// fd1.append("username", this.formData.username);
+		// fd1.append("email", this.formData.email);
+		// fd1.append("password1", this.formData.password1);
+		// fd1.append("password2", this.formData.password2);
+		// console.log(fd1);
+		axios({
+			method:"POST",
+			url:"http://localhost:8000/api/rest-auth/registration/",
+			data:{
+				username: this.formData['username'], 
+				email: this.formData['email'],
+				password1: this.formData['password1'],
+				password2: this.formData['password2'],
+			}	
+		})
+		.then(response => {
+			console.log(response);
+			if (response.status >= 200 && response.status < 206) {
+				console.log(response.data.key);
+				sessionStorage["user_key"]=response.data.key;
+				axios({
+						method: "GET",
+						url: "http://localhost:8000/api/rest-auth/user",
+						headers: {
+							'Content-Type': 'application/json',
+							'Authorization': 'Token ' + response.data.key
+						}
+					})
+					.then(response => {
+						console.log(response);
+						console.log(response.data.pk);
+						axios({
+							method: 'POST',
+							url: "http://localhost:8000/api/users/companies/",
+							data: {
+								company_id: this.formData.company_id,
+								about: this.formData.about,
+								additional_poc: this.formData.additional_poc,
+								user: response.data.pk,
 							}
 						})
 						.then(response => {
 							console.log(response);
-							console.log(response.data.pk);
-							axios({
-								method: 'POST',
-								url: "http://localhost:8000/api/users/companies/",
-								data: {
-									company_id: this.formData.company_id,
-                                    about: this.formData.about,
-									additional_poc: this.formData.additional_poc,
-									user: response.data.pk,
-								}
-							})
-								.then(response => {
-									console.log(response);
-									if (response.status >= 200 && response.status < 206) {
-										sessionStorage["isLoggedIn"] = true;
-										sessionStorage["user_id"] = response.data.user_id;
-                                    }
-                                    window.location.reload();
-                })
-              axios({
-                method:"PUT",
-                url: "http://localhost:8000/api/users/users/"+response.data.pk+"/",
-                headers: {
-                  'Content-Type': 'application/json',
-                },
-                data: {
-                  id: response.data.pk,
-                  user_type: 2,
-                  name: this.formData.name,
-                  phone_number: this.formData.phone_number,
-                }
-              })
+							if (response.status >= 200 && response.status < 206) {
+								sessionStorage["isLoggedIn"] = true;
+								sessionStorage["user_id"] = response.data.user_id;
+							}
+							window.location.reload();
 						})
-				}
-			})
-			.catch(response => {
-				console.log("Error");
-				console.error(response);
-			})
+						axios({
+							method:"PUT",
+							url: "http://localhost:8000/api/users/users/"+response.data.pk+"/",
+							headers: {
+								'Content-Type': 'application/json',
+							},
+							data: {
+								id: response.data.pk,
+								user_type: 2,
+								name: this.formData.name,
+								phone_number: this.formData.phone_number,
+							}
+						})
+					})
+			}
+		})
+		.catch(response => {
+			console.log("Error");
+			console.error(response);
+		})
 
 	}
 
