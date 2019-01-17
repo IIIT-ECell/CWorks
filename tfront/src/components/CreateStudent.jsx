@@ -11,11 +11,8 @@ class CreateStudent extends Component {
 		super();
 
 		this.formData = {
-			student_id: 0,
-			gender: "",
-			permanent_city_res: "",
-			nationality: "",
-			year_of_study: "",
+			gender: "M",
+			year_of_study: "1"
 		};
 
 		this.handleInput = this.handleInput.bind(this);
@@ -30,73 +27,83 @@ class CreateStudent extends Component {
 	handleSubmit(event) {
 		event.preventDefault();
 		console.log(this.formData);
-		let fd1 = new FormData();
-		fd1.append("username", this.formData.username);
-		fd1.append("email", this.formData.email);
-		fd1.append("password1", this.formData.password1);
-		fd1.append("password2", this.formData.password2);
-		fd1.append("user_type", 1);
-		axios
-			.post(
-				"http://localhost:8000/api/rest-auth/registration/",
-				fd1
-			)
-			.then(response => {
-				console.log(response);
-				if (response.status >= 200 && response.status < 206) {
-					console.log(response.data.key);
-					sessionStorage["user_key"]=response.data.key;
+		// let fd1 = new FormData();
+		// fd1.append("username", this.formData.username);
+		// fd1.append("email", this.formData.email);
+		// fd1.append("password1", this.formData.password1);
+		// fd1.append("password2", this.formData.password2);
+		// console.log(fd1);
+		axios({
+			method:"POST",
+			url:"http://localhost:8000/api/rest-auth/registration/",
+			data:{
+				username: this.formData['username'], 
+				email: this.formData['email'],
+				password1: this.formData['password1'],
+				password2: this.formData['password2'],
+			}	
+		})
+		.then(response => {
+			console.log(response);
+			if (response.status >= 200 && response.status < 206) {
+				console.log(response.data.key);
+				sessionStorage["user_key"]=response.data.key;
+				axios({
+						method: "GET",
+						url: "http://localhost:8000/api/rest-auth/user",
+						headers: {
+							'Content-Type': 'application/json',
+							'Authorization': 'Token ' + response.data.key
+						}
+				})
+				.then(response => {
+					console.log(response);
+					console.log(response.data.pk);
+					console.log(this.formData.student_id);
+					console.log(this.formData.gender);
+					console.log(this.formData.permanent_city_res);
+					console.log(this.formData.nationality);
+					console.log(this.formData.year_of_study);
 					axios({
-							method: "GET",
-							url: "http://localhost:8000/api/rest-auth/user",
-							headers: {
-								'Content-Type': 'application/json',
-								'Authorization': 'Token ' + response.data.key
-							}
-						})
-						.then(response => {
-							console.log(response);
-							console.log(response.data.pk);
-							axios({
-								method: 'POST',
-								url: "http://localhost:8000/api/users/students/",
-								data: {
-									student_id: this.formData.student_id,
-									gender: this.formData.gender,
-									permanent_city_res: this.formData.permanent_city_res,
-									nationality: this.formData.nationality,
-									year_of_study: this.formData.year_of_study,
-									user: response.data.pk,
-								}
-							})
-							.then(response => {
-								console.log(response);
-								if (response.status >= 200 && response.status < 206) {
-									sessionStorage["isLoggedIn"] = true;
-									sessionStorage["user_id"] = response.data.user_id;
-								}
-								window.location.reload();
-							})
-							axios({
-								method:"PUT",
-								url: "http://localhost:8000/api/users/users/"+response.data.pk+"/",
-								headers: {
-									'Content-Type': 'application/json',
-								},
-								data: {
-									id: response.data.pk,
-									user_type: 1,
-									name: this.formData.name,
-									phone_number: this.formData.phone_number,
-								}
-							})
-						})
-				}
-			})
-			.catch(response => {
-				console.log("Error");
-				console.error(response);
-			})
+						method: 'POST',
+						url: "http://localhost:8000/api/users/students/",
+						data: {
+							student_id: this.formData.student_id,
+							gender: this.formData.gender,
+							permanent_city_res: this.formData.permanent_city_res,
+							nationality: this.formData.nationality,
+							year_of_study: this.formData.year_of_study,
+							user: response.data.pk,
+						}
+					})
+					.then(response => {
+						console.log(response);
+						if (response.status >= 200 && response.status < 206) {
+							sessionStorage["isLoggedIn"] = true;
+							sessionStorage["user_id"] = response.data.user_id;
+						}
+						window.location.reload();
+					})
+					axios({
+						method:"PUT",
+						url: "http://localhost:8000/api/users/users/"+response.data.pk+"/",
+						headers: {
+							'Content-Type': 'application/json',
+						},
+						data: {
+							id: response.data.pk,
+							user_type: 1,
+							name: this.formData.name,
+							phone_number: this.formData.phone_number,
+						}
+					})
+				})
+			}
+		})
+		.catch(response => {
+			console.log("Error");
+			console.error(response);
+		})
 
 	}
 
@@ -133,7 +140,7 @@ class CreateStudent extends Component {
 				</div>
 				<div className="form-group">
 					<select className="form-control" name="gender" id="gender" onChange={this.handleInput}>
-						<option value="M" selected="">Male</option>
+						<option value="M">Male</option>
 						<option value="F">Female</option>
 						<option value="O">Other</option>
 						<option value="N">Prefer not to say</option>
@@ -147,7 +154,7 @@ class CreateStudent extends Component {
 				</div>
 				<div className="form-group">
 					<select className="form-control" name="year_of_study" id="year_of_study" onChange={this.handleInput}>
-						<option value="1" selected="">First Year Undergrad</option>
+						<option value="1">First Year Undergrad</option>
 						<option value="2">Second Year Undergrad</option>
 						<option value="3">Third Year Undergrad</option>
 						<option value="4">Fourth Year Undergrad</option>
