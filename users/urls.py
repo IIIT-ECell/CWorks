@@ -16,5 +16,5 @@ urlpatterns = [
     path('student/', StudentAPI.as_view()),
     path('company/', CompanyAPI.as_view()),
     path('user/', CustomUserAPI.as_view()),
-    path('users/jobs/', JobAPI.as_view()),
+    path('jobs/', JobAPI.as_view()),
 ]
