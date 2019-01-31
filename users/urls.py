@@ -1,5 +1,6 @@
 from django.urls import include, path
 from rest_framework import routers
+import django_cas_ng.views
 
 from .views import StudentViewSet, CompanyViewSet, CustomUserViewSet, JobViewSet
 from .views import StudentAPI, CompanyAPI, CustomUserAPI, JobAPI
