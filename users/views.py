@@ -1,7 +1,7 @@
 from rest_framework import viewsets, permissions, generics
 
-from .models import Student, Company, CustomUser
-from .serializers import StudentSerializer, CompanySerializer, CustomUserSerializer
+from .models import Student, Company, CustomUser , Job
+from .serializers import StudentSerializer, CompanySerializer, CustomUserSerializer, JobSerializer
 
 
 class CustomUserViewSet(viewsets.ModelViewSet):
@@ -41,6 +41,18 @@ class CompanyViewSet(viewsets.ModelViewSet):
 class CompanyAPI(generics.RetrieveAPIView):
     permission_classes = [permissions.IsAuthenticated, ]
     serializer_class = CompanySerializer
+
+    def get_object(self):
+        return self.request.user
+
+class JobViewSet(viewsets.ModelViewSet):
+    queryset = Job.objects.all()
+    permission_classes = [permissions.AllowAny, ]
+    serializer_class = JobSerializer
+
+class JobAPI(generics.RetrieveAPIView):
+    permission_classes = [permissions.IsAuthenticated, ]
+    serializer_class = JobSerializer
 
     def get_object(self):
         return self.request.user
