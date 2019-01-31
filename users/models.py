@@ -122,3 +122,30 @@ class Company(models.Model):
 
     def __str__(self):
         return self.email
+
+class Job(models.Model):
+    """ 
+    Class Jobs containing information regarding each job
+        Job name
+        Company ID
+        Description
+        Skill
+        Job Start Date
+        Job Duration
+        Stipend
+        Language
+        Category - Internship/Project
+        Payment
+    """
+    job_name = models.CharField(blank=False,max_length=255)
+    company_id = models.ForeignKey(Company, on_delete=models.CASCADE)
+    description = models.TextField(blank=False)
+    skill = models.CharField(max_length=50)
+    job_start_date = models.DateField()
+    job_duration = models.CharField(max_length=255)
+    stipend = models.IntegerField()
+    language = models.CharField(max_length=50)
+    category = models.CharField(max_length=10)
+    def __str__(self):
+        return self.job_name
+
