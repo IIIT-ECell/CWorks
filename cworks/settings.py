@@ -27,7 +27,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-CAS_SERVER_URL = "https://login.iiit.ac.in/cas/"
 
 # Application definition
 
@@ -39,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-    'django_cas_ng',
     'rest_framework',
     'corsheaders',
     'rest_framework.authtoken',
@@ -75,7 +73,6 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django_cas_ng.middleware.CASMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
@@ -104,7 +101,6 @@ TEMPLATES = [
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
-    'django_cas_ng.backends.CASBackend',
 )
 
 

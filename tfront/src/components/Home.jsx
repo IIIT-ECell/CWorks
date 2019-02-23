@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 
+import axios from 'axios';
 import "../styles/home.css";
 
 class Home extends Component {
@@ -12,6 +13,16 @@ class Home extends Component {
       q: [],
       replyView: false,
     };
+  }
+
+  componentDidMount(){
+    axios({
+      method: 'get',
+      url: 'http://localhost:8000/api/users/jobs/',
+    })
+    .then((response)=>{
+      console.log(response);
+    })
   }
 
   render() {
