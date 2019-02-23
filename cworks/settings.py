@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
     'api',
     'users',
+    'jobs',
 ]
 
 REST_FRAMEWORK = {
