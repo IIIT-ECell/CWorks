@@ -13,6 +13,7 @@ import Logout from './components/Logout';
 import User from './components/User';
 import Profile from './components/Profile';
 import CreateStudent from './components/CreateStudent';
+import Jobs from './components/Jobs';
 
 // import logo from './logo.svg';
 import './App.css';
@@ -33,6 +34,7 @@ class App extends Component {
                 <Link to='/login' className='nav-item nav-link'>Login</Link>
                 <Link to='/register' className='nav-item nav-link'>Register</Link>
                 <Link to='/home' className='nav-item nav-link'>Home</Link>
+                <Link to='/jobs' className='nav-item nav-link'>Jobs</Link>
                 <Link to='/profile' className='nav-item nav-link'>Profile</Link>
                 <Link to='/logout' className='nav-item nav-link'>Logout</Link>
               </div>
@@ -45,6 +47,7 @@ class App extends Component {
                 <Route exact path='/register/student' component={CreateStudent} />
                 <Route exact path='/register/company' component={CreateCompany} />
                 <Route exact path='/home' component={Home} />
+                <Route exact path='/jobs' component={Jobs} />
                 <Route exact path='/profile' component={Profile} />
                 <Route exact path='/user/:id'  component={User} />
                 <Route exact path='/logout'  component={Logout} />
