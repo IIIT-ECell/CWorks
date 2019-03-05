@@ -142,7 +142,7 @@ class Job(models.Model):
     description = models.TextField(blank=False)
     skill = models.CharField(max_length=50)
     job_start_date = models.DateField()
-    job_duration = models.CharField(max_length=255)
+    job_duration = models.IntegerField()
     stipend = models.IntegerField()
     language = models.CharField(max_length=50)
     category = models.CharField(max_length=10)
