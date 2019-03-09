@@ -33,9 +33,7 @@ class Home extends Component {
 
     return (
       <div>
-        {console.log(this.state)}
         <h1>HOME</h1>
-  	    {console.log(this.state.q)}
       </div>
     );
   }

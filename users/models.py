@@ -113,7 +113,7 @@ class Company(models.Model):
 
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
 
-    # name = models.CharField(blank=False, max_length=255)
+    name = models.CharField(blank=False, max_length=255, default="")
     company_id = models.CharField(blank=False, max_length=255)
     about = models.CharField(blank=False, max_length=10000)
     # phone_number = models.CharField(blank=False, max_length=10)
@@ -121,7 +121,7 @@ class Company(models.Model):
     additional_poc = models.CharField(blank=True, max_length=512)
 
     def __str__(self):
-        return self.email
+        return self.company_id
 
 class Job(models.Model):
     """ 

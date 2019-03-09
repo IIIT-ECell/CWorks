@@ -39,11 +39,34 @@ class Login extends Component {
       })
       .then( response => {
         if (response.status >= 200 && response.status < 206) {
-          console.log(response.data.key);
+          console.log(response.data);
           sessionStorage["isLoggedIn"] = true;
           sessionStorage["user_key"] = response.data.key;
           console.log("While logging in:");
-          window.location.reload();
+          axios({
+						method: "GET",
+						url: "http://localhost:8000/api/rest-auth/user",
+						headers: {
+							'Content-Type': 'application/json',
+							'Authorization': 'Token ' + response.data.key
+						}
+          })
+          .then((res)=>{
+            sessionStorage["pk"] = res.data.pk;
+            console.log(res.data);
+            axios({
+              method: "GET",
+              url: "http://localhost:8000/api/users/users/"+res.data.pk+"/",
+              headers: {
+                'Content-Type': 'application/json',
+              }
+            })
+            .then((resp)=>{
+              console.log(resp);
+              sessionStorage["user_type"]=resp.data.user_type;
+            })
+            window.location.reload();
+          })
         }
       })
       .catch( response => {

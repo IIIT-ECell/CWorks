@@ -19,8 +19,9 @@ class Home extends Component {
       url: 'http://localhost:8000/api/users/jobs/',
     })
     .then((response)=>{
-      console.log(response);
-      this.setState({jobs:response});
+      this.setState({jobs:response.data});
+      console.log(this.state.jobs);
+
     })
   }
 
@@ -47,6 +48,9 @@ class Home extends Component {
             </tr>
           </thead>
           <tbody id="job_table_body">
+          {this.state.jobs.map((name,index)=>{
+            return <li key="index">{name}</li>;
+          })}
           </tbody>
         </table>
       </div>
