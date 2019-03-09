@@ -23,6 +23,15 @@ class Home extends Component {
       });
       this.setState({jobs:temp_jobs});
     }
+    if("job_date_asc"==event.target.value){
+      let temp_jobs = this.state.jobs;
+      temp_jobs.sort((a,b)=>{
+        let date_a = new Date(a);
+        let date_b = new Date(b);
+        return date_a.isAfter(date_b);
+      });
+      this.setState({jobs:temp_jobs});
+    }
   }
 
   componentDidMount(){
@@ -57,10 +66,13 @@ class Home extends Component {
     return (
       <div>
         <h1>JOBS</h1>
-        <select onChange={this.JobSort}>
-          <option value="random">Random</option>
-          <option value="stipend_desc">Most Paying</option>
-        </select>
+        <form className="col-md-6">
+          <select onChange={this.JobSort} className="form-control">
+            <option value="random">Random</option>
+            <option value="stipend_desc">Most Paying</option>
+            <option value="job_date_asc">Latest</option>
+          </select>
+        </form>
         <table className="table" id="jobs_table">
           <thead>
             <tr>
