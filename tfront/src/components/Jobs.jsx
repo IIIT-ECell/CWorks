@@ -19,9 +19,9 @@ class Home extends Component {
       url: 'http://localhost:8000/api/users/jobs/',
     })
     .then((response)=>{
-      this.setState({jobs:response.data});
+      console.log(response.data);
+      this.setState({ jobs : response.data });
       console.log(this.state.jobs);
-
     })
   }
 
@@ -44,12 +44,24 @@ class Home extends Component {
               <th scope="col">Stipend</th>
               <th scope="col">Language</th>
               <th scope="col">Category</th>
+              <th scope="col">Skill</th>
               <th scope="col">Company</th>
             </tr>
           </thead>
           <tbody id="job_table_body">
-          {this.state.jobs.map((name,index)=>{
-            return <li key="index">{name}</li>;
+          {this.state.jobs.map((item,key)=>{
+            return (
+              <tr key={item.id}>
+                <td>{item.job_name}</td>
+                <td>{item.description}</td>
+                <td>{item.job_start_date}</td>
+                <td>{item.job_duration} Month</td>
+                <td>{item.stipend}</td>
+                <td>{item.language}</td>
+                <td>{item.category}</td>
+                <td>{item.skill}</td>
+              </tr>
+            );
           })}
           </tbody>
         </table>
