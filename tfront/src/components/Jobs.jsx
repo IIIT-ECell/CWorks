@@ -22,6 +22,17 @@ class Home extends Component {
       console.log(response.data);
       this.setState({ jobs : response.data });
       console.log(this.state.jobs);
+      for(let i in this.state.jobs){
+        axios({
+          method: 'get',
+          url: 'http://localhost:8000/api/users/companies/'+ this.state.jobs[i].company_id +'/',
+        })
+        .then((res)=>{
+          let temp_jobs = this.state.jobs;
+          temp_jobs[i]["company_name"] = res.data.name;
+          this.setState({ jobs:temp_jobs });
+        })
+      }
     })
   }
 
@@ -60,6 +71,7 @@ class Home extends Component {
                 <td>{item.language}</td>
                 <td>{item.category}</td>
                 <td>{item.skill}</td>
+                <td>{item.company_name}</td>
               </tr>
             );
           })}
