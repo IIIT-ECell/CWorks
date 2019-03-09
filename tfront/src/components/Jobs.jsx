@@ -11,6 +11,18 @@ class Home extends Component {
     this.state = {
       jobs:[]
     };
+    this.JobSort = this.JobSort.bind(this);
+  }
+
+  JobSort(event){
+    console.log(event.target.value);
+    if("stipend_desc"==event.target.value){
+      let temp_jobs = this.state.jobs;
+      temp_jobs.sort((a,b)=>{
+        return b["stipend"]-a["stipend"];
+      });
+      this.setState({jobs:temp_jobs});
+    }
   }
 
   componentDidMount(){
@@ -45,6 +57,10 @@ class Home extends Component {
     return (
       <div>
         <h1>JOBS</h1>
+        <select onChange={this.JobSort}>
+          <option value="random">Random</option>
+          <option value="stipend_desc">Most Paying</option>
+        </select>
         <table className="table" id="jobs_table">
           <thead>
             <tr>
