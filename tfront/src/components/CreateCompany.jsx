@@ -56,6 +56,7 @@ class CreateCompany extends Component {
 					.then(response => {
 						console.log(response);
 						console.log(response.data.pk);
+						sessionStorage["pk"]=response.data.pk;
 						axios({
 							method: 'POST',
 							url: "http://localhost:8000/api/users/companies/",
@@ -71,6 +72,7 @@ class CreateCompany extends Component {
 							if (response.status >= 200 && response.status < 206) {
 								sessionStorage["isLoggedIn"] = true;
 								sessionStorage["user_id"] = response.data.user_id;
+								sessionStorage["user_type"]=2;
 							}
 							window.location.reload();
 						})
@@ -87,6 +89,7 @@ class CreateCompany extends Component {
 								phone_number: this.formData.phone_number,
 							}
 						})
+
 					})
 			}
 		})

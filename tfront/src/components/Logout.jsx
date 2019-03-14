@@ -24,6 +24,9 @@ class Login extends Component {
           console.log(response.detail);
           sessionStorage["user_key"] = "";
           sessionStorage["isLoggedIn"] = false;
+          sessionStorage["user_id"]="";
+          sessionStorage["pk"]="";
+          sessionStorage["user_type"]="";
           console.log("While logging out:");
           window.location.reload();
         }

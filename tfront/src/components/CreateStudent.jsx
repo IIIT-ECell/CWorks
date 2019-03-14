@@ -57,13 +57,7 @@ class CreateStudent extends Component {
 						}
 				})
 				.then(response => {
-					console.log(response);
-					console.log(response.data.pk);
-					console.log(this.formData.student_id);
-					console.log(this.formData.gender);
-					console.log(this.formData.permanent_city_res);
-					console.log(this.formData.nationality);
-					console.log(this.formData.year_of_study);
+					sessionStorage["pk"]=response.data.pk;
 					axios({
 						method: 'POST',
 						url: "http://localhost:8000/api/users/students/",
@@ -81,6 +75,7 @@ class CreateStudent extends Component {
 						if (response.status >= 200 && response.status < 206) {
 							sessionStorage["isLoggedIn"] = true;
 							sessionStorage["user_id"] = response.data.user_id;
+							sessionStorage["user_type"]=1;
 						}
 						window.location.reload();
 					})
