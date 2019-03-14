@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
-import { Redirect, Link } from 'react-router-dom';
-
-import User from './User';
+import { Redirect } from 'react-router-dom';
 
 import axios from 'axios';
-
 import "../styles/home.css";
 
 class Home extends Component {
@@ -12,41 +9,31 @@ class Home extends Component {
   constructor() {
     super();
     this.state = {
-      isLoggedIn: false,
-      key: "",
       questions: [],
       q: [],
       replyView: false,
     };
   }
 
-
-  componentWillReceiveProps(nextProps) {
-    this.setState({isLoggedIn: nextProps.getMark, key: nextProps.getKey});
-    console.log('Props received at Login');
-    console.log(this.state);
-  }
-
-  componentWillMount() {
-    this.setState({isLoggedIn: this.props.getMark, key: this.props.getKey});
-    console.log(this.state);
-  }
-
-  componentDidMount() {
-
+  componentDidMount(){
+    axios({
+      method: 'get',
+      url: 'http://localhost:8000/api/users/jobs/',
+    })
+    .then((response)=>{
+      console.log(response);
+    })
   }
 
   render() {
-    if (!this.props.getKey) {
+    if (sessionStorage["isLoggedIn"]==="false") {
       return <Redirect to="/login" />
     }
 
 
     return (
       <div>
-        {console.log(this.state)}
         <h1>HOME</h1>
-  	    {console.log(this.state.q)}
       </div>
     );
   }

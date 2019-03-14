@@ -9,54 +9,23 @@ class Login extends Component {
 
   constructor() {
     super();
-    this.state = {
-      isLoggedIn: false,
-      key: "",
-    };
 
-    this.formData = {
-      email: "",
-      username: "",
-      password: "",
-    }
+    this.formData = {}
 
-    this.handleUsername = this.handleUsername.bind(this)
-    this.handleEmail = this.handleEmail.bind(this)
-    this.handlePassword = this.handlePassword.bind(this)
+    this.handleInput = this.handleInput.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.setState({isLoggedIn: nextProps.getMark, key: nextProps.getKey});    
-    console.log('Props received at Login');
-    console.log(this.state);
-  }
-
-  componentWillMount() {
-    this.setState({isLoggedIn: this.props.getMark, key: this.props.getKey});
-    console.log(this.state);
-  }
-
-  handleUsername(event) {
-    event.preventDefault();
-    this.formData.username = event.target.value;
-  }
-
-  handleEmail(event) {
-    event.preventDefault();
-    this.formData.email = event.target.value;
-  }
-
-  handlePassword(event) {
-    event.preventDefault();
-    this.formData.password = event.target.value;
-  }
+  handleInput(event) {
+		event.preventDefault();
+		this.formData[event.target.id] = event.target.value;
+	}
 
   handleSubmit(event) {
     event.preventDefault();
+		console.log(this.formData);
     let fd = new FormData();
     fd.append("username", this.formData.username);
-    fd.append("email", this.formData.email);
     fd.append("password", this.formData.password);
 
     axios
@@ -70,17 +39,34 @@ class Login extends Component {
       })
       .then( response => {
         if (response.status >= 200 && response.status < 206) {
-          console.log(response.data.key);
-          // this.props.route.marklogin();
-          this.props.setMark(true);
-          this.props.setKey(response.data.key);
-          let appState = {
-            isLoggedIn: this.props.getMark,
-            key: this.props.getKey,
-          };
-          localStorage["appState"] = JSON.stringify(appState);
-          console.log("While logging in:")
-          console.log(appState);
+          console.log(response.data);
+          sessionStorage["isLoggedIn"] = true;
+          sessionStorage["user_key"] = response.data.key;
+          console.log("While logging in:");
+          axios({
+						method: "GET",
+						url: "http://localhost:8000/api/rest-auth/user",
+						headers: {
+							'Content-Type': 'application/json',
+							'Authorization': 'Token ' + response.data.key
+						}
+          })
+          .then((res)=>{
+            sessionStorage["pk"] = res.data.pk;
+            console.log(res.data);
+            axios({
+              method: "GET",
+              url: "http://localhost:8000/api/users/users/"+res.data.pk+"/",
+              headers: {
+                'Content-Type': 'application/json',
+              }
+            })
+            .then((resp)=>{
+              console.log(resp);
+              sessionStorage["user_type"]=resp.data.user_type;
+            })
+            window.location.reload();
+          })
         }
       })
       .catch( response => {
@@ -91,20 +77,20 @@ class Login extends Component {
   }
 
   render() {
-    if (this.props.getKey) {
+    if (sessionStorage["isLoggedIn"]==="true"){
       return <Redirect to="/home" />
     }
     const logoUrl = require(`../images/f81.jpeg`)
     return (
    	  <form onSubmit={this.handleSubmit} className="form-signin">
         <div className="form-group">
-          <img className="logoimg" src={logoUrl} />
+          <img className="logoimg" src={logoUrl} alt="placeholder logo" />
         </div>
         <div className="form-group">
-          <input className = "form-control" placeholder = "Username" type="text" id="username" onChange={this.handleUsername} />
+          <input className = "form-control" placeholder = "Username" type="text" id="username" onChange={this.handleInput} />
         </div>
         <div className="form-group">
-          <input className = "form-control" placeholder = "Password" type="password" id="password" onChange={this.handlePassword} />
+          <input className = "form-control" placeholder = "Password" type="password" id="password" onChange={this.handleInput} />
         </div>
         <div className="form-group">
           <button className = "btn btn-primary" id = "loginbutton" type="submit">Login</button>
