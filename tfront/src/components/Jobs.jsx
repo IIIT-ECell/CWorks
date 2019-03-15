@@ -26,9 +26,12 @@ class Home extends Component {
     if("job_date_asc"==event.target.value){
       let temp_jobs = this.state.jobs;
       temp_jobs.sort((a,b)=>{
-        let date_a = new Date(a);
-        let date_b = new Date(b);
-        return date_a.isAfter(date_b);
+        var date_a = new Date(a["job_start_date"].split('-')[0],a["job_start_date"].split('-')[1],a["job_start_date"].split('-')[2]);
+        var date_b = new Date(b["job_start_date"].split('-')[0],b["job_start_date"].split('-')[1],b["job_start_date"].split('-')[2]);
+        console.log(date_a);
+        console.log(date_b);
+        console.log(date_a>date_b);
+        return date_b.getTime()-date_a.getTime();
       });
       this.setState({jobs:temp_jobs});
     }
