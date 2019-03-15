@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import axios from 'axios';
 import "../styles/home.css";
@@ -88,6 +89,8 @@ class Home extends Component {
               <th scope="col">Category</th>
               <th scope="col">Skill</th>
               <th scope="col">Company</th>
+              <th scope="col">Edit</th>
+              <th scope="col">Delete</th>
             </tr>
           </thead>
           <tbody id="job_table_body">
@@ -103,6 +106,8 @@ class Home extends Component {
                 <td>{item.category}</td>
                 <td>{item.skill}</td>
                 <td>{item.company_name}</td>
+                <td><a href={"/jobs/edit/"+item.company_id+"/"+item.id}><FontAwesomeIcon icon="edit"/></a></td>
+                <td><a href={"/jobs/delete/"+item.id}><FontAwesomeIcon icon="trash"/></a></td>
               </tr>
             );
           })}
