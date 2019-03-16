@@ -45,18 +45,34 @@ class Profile extends Component {
         console.log(this.state);
       });
 
-      axios({
-        method: 'GET',
-        url: 'http://localhost:8000/api/users/students/' + response.data.pk,
-      })
-      .then((res)=>{
-        let temp_user = this.state.user;
-        for(let j in res.data){
-          temp_user[j] = res.data[j];
-        }
-        this.setState({user: temp_user});
-        console.log(this.state);
-      })
+      if(localStorage["user_type"]==1){  
+        axios({
+          method: 'GET',
+          url: 'http://localhost:8000/api/users/students/' + response.data.pk,
+        })
+        .then((res)=>{
+          let temp_user = this.state.user;
+          for(let j in res.data){
+            temp_user[j] = res.data[j];
+          }
+          this.setState({user: temp_user});
+          console.log(this.state);
+        })
+      }
+      else{
+        axios({
+          method: 'GET',
+          url: 'http://localhost:8000/api/users/companies/' + response.data.pk,
+        })
+        .then((res)=>{
+          let temp_user = this.state.user;
+          for(let j in res.data){
+            temp_user[j] = res.data[j];
+          }
+          this.setState({user: temp_user});
+          console.log(this.state);
+        })
+      }
     });
   }
 
@@ -73,26 +89,46 @@ class Profile extends Component {
   }
 
   render() {
-    return (
-      <div>
-        {console.log(this.state)}
-        <div className="topFreeze">
-          <h1>PROFILE</h1>
-        </div>
-        <div className="row">
-          <div className="col-sm-12 col-md-3 profile">
-            <Gravatar name={this.state.user.name} size={200}/>
+    if(localStorage["user_type"]==1){
+      return (
+        <div>
+          {console.log(this.state)}
+          <div className="topFreeze">
+            <h1>STUDENT PROFILE</h1>
           </div>
-          <div className="col-sm-12 col-md-9">
-            <p>Name: {this.state.user.name}</p>
-            <p>Roll Number: {this.state.user.student_id}</p>
-            <p>Nationality: {this.state.user.nationality}</p>
-            <p>Phone Number: {this.state.user.phone_number}</p>
-            <p>City of Residence: {this.state.user.permanent_city_res}</p>
+          <div className="row">
+          
+            <div className="col-sm-12 text-center">
+              <p>Name: {this.state.user.name}</p>
+              <p>Roll Number: {this.state.user.student_id}</p>
+              <p>Nationality: {this.state.user.nationality}</p>
+              <p>Phone Number: {this.state.user.phone_number}</p>
+              <p>City of Residence: {this.state.user.permanent_city_res}</p>
+            </div>
           </div>
         </div>
-      </div>
-    );
+      );
+    }
+    else{
+      return (
+        <div>
+          {console.log(this.state)}
+          <div className="topFreeze">
+            <h1>COMPANY PROFILE</h1>
+          </div>
+          <div className="row">
+          
+            <div className="col-sm-12 text-center">
+              <p>Name: {this.state.user.name}</p>
+              <p>Company Id: {this.state.user.company_id}</p>
+              <p>About: {this.state.user.about}</p>
+              <p>Phone Number: {this.state.user.phone_number}</p>
+              <p>Additional POC: {this.state.user.additional_poc}</p>
+            </div>
+          </div>
+        </div>
+      );
+    }
   }
 }
 
