@@ -5,34 +5,39 @@ import axios from 'axios';
 
 import "../styles/login.css";
 
-class AddJob extends Component{
+class EditJob extends Component{
     constructor() {
         super();
-        this.formData = {};
+        this.state = {
+            formData:{}
+        }
         this.handleInput = this.handleInput.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
     }
     handleInput(event) {
         event.preventDefault();
-        console.log(this.formData);
-        this.formData[event.target.id] = event.target.value;
+        var temp_form = this.state.formData;
+        temp_form[event.target.id] = event.target.value;
+        this.setState({formData:temp_form});
+        console.log(this.state.formData);
     }
 
     handleSubmit(event){
         event.preventDefault();
-        console.log(this.formData);
+        console.log(this.state.formData);
         axios({
-            method: 'POST',
-            url: "http://localhost:8000/api/users/jobs/",
+            method: 'PUT',
+            url: "http://localhost:8000/api/users/jobs/"+this.props.match.params.id+"/",
             data:{
-                job_name: this.formData.job_name,
-                description: this.formData.description,
-                skill: this.formData.skill,
-                job_start_date: this.formData.job_start_date,
-                job_duration: this.formData.job_duration,
-                stipend: this.formData.stipend,
-                language: this.formData.language,
-                category: this.formData.category,
+                id: this.state.formData.id,
+                job_name: this.state.formData.job_name,
+                description: this.state.formData.description,
+                skill: this.state.formData.skill,
+                job_start_date: this.state.formData.job_start_date,
+                job_duration: this.state.formData.job_duration,
+                stipend: this.state.formData.stipend,
+                language: this.state.formData.language,
+                category: this.state.formData.category,
                 company_id: localStorage["pk"],
             },
             headers: {
@@ -48,12 +53,30 @@ class AddJob extends Component{
 		})
     }
 
+    componentDidMount(){
+        var id = this.props.match.params.id;
+        console.log(id);
+        axios({
+            method:"GET",
+            url:"http://localhost:8000/api/users/jobs/"+id,
+        })
+        .then((response)=>{
+            console.log(response.data);
+            this.setState({formData:response.data}); 
+            console.log(this.state);
+        })
+    }
+
     render() {
         if (localStorage["isLoggedIn"]==="false") {
             return <Redirect to="/login" />
         }
 
         if(localStorage["user_type"]==1){
+            return <Redirect to="/jobs"/>
+        }
+
+        if(localStorage["pk"]!=this.props.match.params.company_id){
             return <Redirect to="/jobs"/>
         }
 
@@ -64,7 +87,7 @@ class AddJob extends Component{
                         Job name
                     </label>
                     <div className="col-sm-10">
-                        <input name="job_name" id="job_name" className="form-control" type="text" onChange={this.handleInput}/>
+                        <input name="job_name" id="job_name" value={this.state.formData.job_name} className="form-control" type="text" onChange={this.handleInput}/>
                     </div>
                 </div>
                 <div className="form-group">
@@ -72,7 +95,7 @@ class AddJob extends Component{
                         Description
                     </label>
                     <div className="col-sm-10">
-                        <input name="description" id="description" className="form-control" type="text" onChange={this.handleInput}/>
+                        <input name="description" id="description" value={this.state.formData.description} className="form-control" type="text" onChange={this.handleInput}/>
                     </div>
                 </div>
                 <div className="form-group">
@@ -80,7 +103,7 @@ class AddJob extends Component{
                     Skill
                     </label>
                     <div className="col-sm-10">
-                        <input name="skill" id="skill" className="form-control" type="text" onChange={this.handleInput}/>
+                        <input name="skill" id="skill" value={this.state.formData.skill} className="form-control" type="text" onChange={this.handleInput}/>
                     </div>
                 </div>
                 <div className="form-group">
@@ -88,7 +111,7 @@ class AddJob extends Component{
                     Job start date
                     </label>
                     <div className="col-sm-10">
-                        <input name="job_start_date" id="job_start_date" className="form-control" type="date" onChange={this.handleInput}/>
+                        <input name="job_start_date" id="job_start_date" value={this.state.formData.job_start_date} className="form-control" type="date" onChange={this.handleInput}/>
                     </div>
                 </div>
                 <div className="form-group">
@@ -96,7 +119,7 @@ class AddJob extends Component{
                     Job duration
                     </label>
                     <div className="col-sm-10">
-                        <input name="job_duration" id="job_duration" className="form-control" type="number" onChange={this.handleInput}/>
+                        <input name="job_duration" id="job_duration" value={this.state.formData.job_duration} className="form-control" type="number" onChange={this.handleInput}/>
                     </div>
                 </div>
                 <div className="form-group">
@@ -104,7 +127,7 @@ class AddJob extends Component{
                     Stipend
                     </label>
                     <div className="col-sm-10">
-                        <input name="stipend" id="stipend" className="form-control" type="number" onChange={this.handleInput}/>
+                        <input name="stipend" id="stipend" value={this.state.formData.stipend} className="form-control" type="number" onChange={this.handleInput}/>
                     </div>
                 </div>
                 <div className="form-group">
@@ -112,7 +135,7 @@ class AddJob extends Component{
                     Language
                     </label>
                     <div className="col-sm-10">
-                        <input name="language" id="language" className="form-control" type="text" onChange={this.handleInput}/>
+                        <input name="language" id="language" value={this.state.formData.language} className="form-control" type="text" onChange={this.handleInput}/>
                     </div>
                 </div>
                 <div className="form-group">
@@ -120,7 +143,7 @@ class AddJob extends Component{
                     Category
                     </label>
                     <div className="col-sm-10">
-                        <input name="category" id="category" className="form-control" type="text" onChange={this.handleInput}/>
+                        <input name="category" id="category" value={this.state.formData.category} className="form-control" type="text" onChange={this.handleInput}/>
                     </div>
                 </div>
                 <button className="btn btn-primary" id="loginbutton" type="submit">Add Job</button>
@@ -130,4 +153,4 @@ class AddJob extends Component{
 
 }
 
-export default AddJob;
+export default EditJob;

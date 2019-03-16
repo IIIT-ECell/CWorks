@@ -29,10 +29,9 @@ class Profile extends Component {
       return response;
     })
     .then((response)=>{
-      let _url = 'http://localhost:8000/api/users/users/' + response.data.pk;
       axios({
-        method: 'get',
-        url: _url,
+        method: 'GET',
+        url: 'http://localhost:8000/api/users/users/' + response.data.pk,
         headers: {'Authorization': token}
       })
       .then((res)=>{
@@ -40,24 +39,42 @@ class Profile extends Component {
         return res;
       })
       .then((res)=>{
-        this.setState({user: res.data});
+        let temp_user = this.state.user;
+        for(let i in temp_user){
+          temp_user[i] = res.data[i];
+        }
+        this.setState({user: temp_user});
+        console.log(this.state);
+      })
+
+      axios({
+        method: 'GET',
+        url: 'http://localhost:8000/api/users/students/' + response.data.pk,
+      })
+      .then((res)=>{
+        let temp_user = this.state.user;
+        for(let j in temp_user){
+          temp_user[j] = res.data[j];
+        }
+        this.setState({user: temp_user});
+        console.log(this.state);
       })
     })
   }
 
   componentWillMount() {
-    this.setState({ isLoggedIn: sessionStorage["isLoggedIn"], key: sessionStorage["key"] });
+    this.setState({ isLoggedIn: localStorage["isLoggedIn"], key: localStorage["key"] });
     console.log(this.state);
   }
 
   componentDidMount() {
     this.getDetails();
+    console.log("State:");
+    console.log(this.state);
+    console.log(this.state);
   }
 
   render() {
-    if (!this.props.getKey) {
-      return <Redirect to="/home" />
-    }
     return (
       <div>
         {console.log(this.state)}

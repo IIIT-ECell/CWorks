@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faIgloo, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import $ from 'jquery';
@@ -15,11 +18,16 @@ import Profile from './components/Profile';
 import CreateStudent from './components/CreateStudent';
 import Jobs from './components/Jobs';
 import AddJob from './components/AddJob';
+import DeleteJob from './components/DeleteJob';
 
 // import logo from './logo.svg';
 import './App.css';
 import CreateCompany from './components/CreateCompany';
+import EditJob from './components/EditJob';
 
+library.add(faIgloo);
+library.add(faEdit);
+library.add(faTrash);
 class App extends Component {
   render() {
     return (
@@ -53,6 +61,8 @@ class App extends Component {
                 <Route exact path='/user/:id'  component={User} />
                 <Route exact path='/logout'  component={Logout} />
                 <Route exact path='/jobs/add' component={AddJob} />
+                <Route exact path='/jobs/edit/:company_id/:id' component={EditJob} />
+                <Route exact path='/jobs/delete/:id' component={DeleteJob} />
               </Switch>
             </div>
           </div>

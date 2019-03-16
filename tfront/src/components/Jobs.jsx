@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import axios from 'axios';
 import "../styles/home.css";
@@ -26,9 +27,12 @@ class Home extends Component {
     if("job_date_asc"==event.target.value){
       let temp_jobs = this.state.jobs;
       temp_jobs.sort((a,b)=>{
-        let date_a = new Date(a);
-        let date_b = new Date(b);
-        return date_a.isAfter(date_b);
+        var date_a = new Date(a["job_start_date"].split('-')[0],a["job_start_date"].split('-')[1],a["job_start_date"].split('-')[2]);
+        var date_b = new Date(b["job_start_date"].split('-')[0],b["job_start_date"].split('-')[1],b["job_start_date"].split('-')[2]);
+        console.log(date_a);
+        console.log(date_b);
+        console.log(date_a>date_b);
+        return date_b.getTime()-date_a.getTime();
       });
       this.setState({jobs:temp_jobs});
     }
@@ -58,7 +62,7 @@ class Home extends Component {
   }
 
   render() {
-    if (sessionStorage["isLoggedIn"]==="false") {
+    if (localStorage["isLoggedIn"]==="false") {
       return <Redirect to="/login" />
     }
 
@@ -85,6 +89,8 @@ class Home extends Component {
               <th scope="col">Category</th>
               <th scope="col">Skill</th>
               <th scope="col">Company</th>
+              <th scope="col">Edit</th>
+              <th scope="col">Delete</th>
             </tr>
           </thead>
           <tbody id="job_table_body">
@@ -100,6 +106,8 @@ class Home extends Component {
                 <td>{item.category}</td>
                 <td>{item.skill}</td>
                 <td>{item.company_name}</td>
+                <td><a href={"/jobs/edit/"+item.company_id+"/"+item.id}><FontAwesomeIcon icon="edit"/></a></td>
+                <td><a href={"/jobs/delete/"+item.id}><FontAwesomeIcon icon="trash"/></a></td>
               </tr>
             );
           })}
