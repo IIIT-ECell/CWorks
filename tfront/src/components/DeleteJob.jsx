@@ -12,7 +12,7 @@ class DeleteJob extends Component{
         this.handleDelete = this.handleDelete.bind(this);
     }
     handleDelete(){
-        if(this.state.job.company_id==sessionStorage["pk"]){
+        if(this.state.job.company_id==localStorage["pk"]){
             axios({
                 method:'DELETE',
                 url:"http://localhost:8000/api/users/jobs/"+this.props.match.params.id,

@@ -46,7 +46,7 @@ class Profile extends Component {
   }
 
   componentWillMount() {
-    this.setState({ isLoggedIn: sessionStorage["isLoggedIn"], key: sessionStorage["key"] });
+    this.setState({ isLoggedIn: localStorage["isLoggedIn"], key: localStorage["key"] });
     console.log(this.state);
   }
 

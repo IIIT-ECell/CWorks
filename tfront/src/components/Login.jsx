@@ -40,8 +40,8 @@ class Login extends Component {
       .then( response => {
         if (response.status >= 200 && response.status < 206) {
           console.log(response.data);
-          sessionStorage["isLoggedIn"] = true;
-          sessionStorage["user_key"] = response.data.key;
+          localStorage["isLoggedIn"] = true;
+          localStorage["user_key"] = response.data.key;
           console.log("While logging in:");
           axios({
 						method: "GET",
@@ -52,7 +52,7 @@ class Login extends Component {
 						}
           })
           .then((res)=>{
-            sessionStorage["pk"] = res.data.pk;
+            localStorage["pk"] = res.data.pk;
             console.log(res.data);
             axios({
               method: "GET",
@@ -63,7 +63,7 @@ class Login extends Component {
             })
             .then((resp)=>{
               console.log(resp);
-              sessionStorage["user_type"]=resp.data.user_type;
+              localStorage["user_type"]=resp.data.user_type;
             })
             window.location.reload();
           })
@@ -77,7 +77,7 @@ class Login extends Component {
   }
 
   render() {
-    if (sessionStorage["isLoggedIn"]==="true"){
+    if (localStorage["isLoggedIn"]==="true"){
       return <Redirect to="/home" />
     }
     const logoUrl = require(`../images/f81.jpeg`)

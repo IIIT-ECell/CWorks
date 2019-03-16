@@ -62,7 +62,7 @@ class Home extends Component {
   }
 
   render() {
-    if (sessionStorage["isLoggedIn"]==="false") {
+    if (localStorage["isLoggedIn"]==="false") {
       return <Redirect to="/login" />
     }
 

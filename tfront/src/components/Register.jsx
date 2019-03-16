@@ -6,7 +6,7 @@ import "../styles/register.css";
 
 class Register extends Component {
   render() {
-    if (sessionStorage["user_key"] && sessionStorage["isLoggedIn"]==="true") {
+    if (localStorage["user_key"] && localStorage["isLoggedIn"]==="true") {
       return <Redirect to="/home" />
     }
     return (

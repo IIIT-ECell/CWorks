@@ -38,7 +38,7 @@ class EditJob extends Component{
                 stipend: this.state.formData.stipend,
                 language: this.state.formData.language,
                 category: this.state.formData.category,
-                company_id: sessionStorage["pk"],
+                company_id: localStorage["pk"],
             },
             headers: {
                 'Content-Type': 'application/json',
@@ -68,15 +68,15 @@ class EditJob extends Component{
     }
 
     render() {
-        if (sessionStorage["isLoggedIn"]==="false") {
+        if (localStorage["isLoggedIn"]==="false") {
             return <Redirect to="/login" />
         }
 
-        if(sessionStorage["user_type"]==1){
+        if(localStorage["user_type"]==1){
             return <Redirect to="/jobs"/>
         }
 
-        if(sessionStorage["pk"]!=this.props.match.params.company_id){
+        if(localStorage["pk"]!=this.props.match.params.company_id){
             return <Redirect to="/jobs"/>
         }
 
