@@ -22,11 +22,11 @@ class Login extends Component {
       .then( response => {
         if (response.status >= 200 && response.status < 206) {
           console.log(response.detail);
-          sessionStorage["user_key"] = "";
-          sessionStorage["isLoggedIn"] = false;
-          sessionStorage["user_id"]="";
-          sessionStorage["pk"]="";
-          sessionStorage["user_type"]="";
+          localStorage["user_key"] = "";
+          localStorage["isLoggedIn"] = false;
+          localStorage["user_id"]="";
+          localStorage["pk"]="";
+          localStorage["user_type"]="";
           console.log("While logging out:");
           window.location.reload();
         }
@@ -39,7 +39,7 @@ class Login extends Component {
   }
 
   render() {
-    if (sessionStorage["isLoggedIn"]==="false") {
+    if (localStorage["isLoggedIn"]==="false") {
       return <Redirect to="/home" />
     }
     return (

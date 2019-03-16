@@ -33,7 +33,7 @@ class AddJob extends Component{
                 stipend: this.formData.stipend,
                 language: this.formData.language,
                 category: this.formData.category,
-                company_id: sessionStorage["pk"],
+                company_id: localStorage["pk"],
             },
             headers: {
                 'Content-Type': 'application/json',
@@ -49,11 +49,11 @@ class AddJob extends Component{
     }
 
     render() {
-        if (sessionStorage["isLoggedIn"]==="false") {
+        if (localStorage["isLoggedIn"]==="false") {
             return <Redirect to="/login" />
         }
 
-        if(sessionStorage["user_type"]==1){
+        if(localStorage["user_type"]==1){
             return <Redirect to="/jobs"/>
         }
 

@@ -47,7 +47,7 @@ class CreateStudent extends Component {
 			console.log(response);
 			if (response.status >= 200 && response.status < 206) {
 				console.log(response.data.key);
-				sessionStorage["user_key"]=response.data.key;
+				localStorage["user_key"]=response.data.key;
 				axios({
 						method: "GET",
 						url: "http://localhost:8000/api/rest-auth/user",
@@ -57,7 +57,7 @@ class CreateStudent extends Component {
 						}
 				})
 				.then(response => {
-					sessionStorage["pk"]=response.data.pk;
+					localStorage["pk"]=response.data.pk;
 					axios({
 						method: 'POST',
 						url: "http://localhost:8000/api/users/students/",
@@ -73,9 +73,9 @@ class CreateStudent extends Component {
 					.then(response => {
 						console.log(response);
 						if (response.status >= 200 && response.status < 206) {
-							sessionStorage["isLoggedIn"] = true;
-							sessionStorage["user_id"] = response.data.user_id;
-							sessionStorage["user_type"]=1;
+							localStorage["isLoggedIn"] = true;
+							localStorage["user_id"] = response.data.user_id;
+							localStorage["user_type"]=1;
 						}
 						window.location.reload();
 					})
@@ -103,7 +103,7 @@ class CreateStudent extends Component {
 	}
 
 	render() {
-		if (sessionStorage["user_key"] && sessionStorage["isLoggedIn"]==="true") {
+		if (localStorage["user_key"] && localStorage["isLoggedIn"]==="true") {
 			return <Redirect to="/home" />
 		}
 		const logoUrl = require(`../images/f81.jpeg`)

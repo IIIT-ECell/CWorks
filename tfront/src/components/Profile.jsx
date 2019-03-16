@@ -44,6 +44,7 @@ class Profile extends Component {
           temp_user[i] = res.data[i];
         }
         this.setState({user: temp_user});
+        console.log(this.state);
       })
 
       axios({
@@ -56,12 +57,13 @@ class Profile extends Component {
           temp_user[j] = res.data[j];
         }
         this.setState({user: temp_user});
+        console.log(this.state);
       })
     })
   }
 
   componentWillMount() {
-    this.setState({ isLoggedIn: sessionStorage["isLoggedIn"], key: sessionStorage["user_key"] });
+    this.setState({ isLoggedIn: localStorage["isLoggedIn"], key: localStorage["key"] });
     console.log(this.state);
   }
 
