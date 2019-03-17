@@ -107,34 +107,46 @@ class CreateStudent extends Component {
 			return <Redirect to="/home" />
 		}
 		const logoUrl = require(`../images/f81.jpeg`)
+		let countryList = ["India", "USA", "Kuwait", "Bahrain", "Saudi Arabia", "UK", "Others"];
+		var countries = [<option value="" key="100">Please select your nationality</option>]
+		countryList.forEach((country, index) => countries.push(<option key={index} value={country}>{country}</option>));
+
 		return (
-			<form onSubmit={this.handleSubmit} className="form-signin">
+			<form onSubmit={this.handleSubmit} className="form-signin" >
 				<div className="form-group">
-					<img className="logoimg" src={logoUrl} alt="placeholder logo" />
+					<img className="logoimg" src={logoUrl} alt="placeholder logo"/>
 				</div>
 				<div className="form-group">
-					<input className="form-control" placeholder="Username" type="text" id="username" name="username" onChange={this.handleInput} />
+					<label htmlFor="username">Username</label>
+					<input className="form-control" type="text" id="username" name="username" required />
 				</div>
 				<div className="form-group">
-					<input className="form-control" placeholder="Email" type="text" id="email" name="email" onChange={this.handleInput} />
+					<label htmlFor="email">Email</label>
+					<input className="form-control" type="text" id="email" name="email" required />
 				</div>
 				<div className="form-group">
-					<input className="form-control" placeholder="Password" type="password" id="password1" name="password1" onChange={this.handleInput} />
+					<label htmlFor="password1">Password</label>
+					<input className="form-control" type="password" id="password1" name="password1" required />
 				</div>
 				<div className="form-group">
-					<input className="form-control" placeholder="Verify Password" type="password" id="password2" name="password2" onChange={this.handleInput} />
+					<label htmlFor="password2">Password match</label>
+					<input className="form-control" type="password" id="password2" name="password2" required />
 				</div>
 				<div className="form-group">
-					<input className="form-control" placeholder="Student Id" type="number" id="student_id" name="student_id" onChange={this.handleInput} />
+					<label htmlFor="student_id">Student ID</label>
+					<input className="form-control" type="text" id="student_id" name="student_id" required pattern="^\d+$"/>
 				</div>
 				<div className="form-group">
-					<input className="form-control" placeholder="Name" type="text" id="name" name="name" onChange={this.handleInput} />
+					<label htmlFor="name">Name</label>
+					<input className="form-control" type="text" id="name" name="name" required pattern="^([a-zA-Z]+ )[a-zA-Z]+$" />
 				</div>
-        <div className="form-group">
-					<input className="form-control" placeholder="Phone Number" type="text" id="phone_number" name="phone_number" onChange={this.handleInput} />
+        		<div className="form-group">
+					<label htmlFor="phone_number">Phone number</label>
+					<input className="form-control" type="text" id="phone_number" name="phone_number" required pattern="^\d+$" />
 				</div>
 				<div className="form-group">
-					<select className="form-control" name="gender" id="gender" onChange={this.handleInput}>
+					<select className="form-control" name="gender" id="gender" required>
+						<option value="">Please select your gender</option>
 						<option value="M">Male</option>
 						<option value="F">Female</option>
 						<option value="O">Other</option>
@@ -142,13 +154,17 @@ class CreateStudent extends Component {
 					</select>
 				</div>
 				<div className="form-group">
-					<input className="form-control" placeholder="Permanent City" type="text" id="permanent_city_res" name="permanent_city_res" onChange={this.handleInput} />
+					<label htmlFor="permanent_city_res">Permanent residence city</label>
+					<input className="form-control" type="text" id="permanent_city_res" name="permanent_city_res" required />
 				</div>
 				<div className="form-group">
-					<input className="form-control" placeholder="Nationality" type="text" id="nationality" name="nationality" onChange={this.handleInput} />
+					<select className="form-control" id="nationality" name="nationality" required>
+						{countries}
+					</select>
 				</div>
 				<div className="form-group">
-					<select className="form-control" name="year_of_study" id="year_of_study" onChange={this.handleInput}>
+					<select className="form-control" name="year_of_study" id="year_of_study" required>
+						<option value="">Please select your year of study</option>
 						<option value="1">First Year Undergrad</option>
 						<option value="2">Second Year Undergrad</option>
 						<option value="3">Third Year Undergrad</option>
@@ -161,6 +177,12 @@ class CreateStudent extends Component {
 				</div>
 			</form>
 		);
+	}
+
+	componentDidMount(){
+		var inputElms = document.querySelectorAll(".form-signin input, .form-signin select");
+
+		inputElms.forEach(elm => elm.addEventListener("change", ev => this.handleInput(ev)));
 	}
 }
 
