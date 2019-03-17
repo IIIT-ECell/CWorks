@@ -102,6 +102,37 @@ class CreateStudent extends Component {
 
 	}
 
+	checkPasswordMatch(){
+		var pass1 = document.getElementById("password1"),
+			pass2 = document.getElementById("password2"),
+			errorText = document.getElementById("password2_help");
+			
+		if(pass2.value.length && pass2.value !== pass1.value){
+			pass2.classList.add("is-invalid")
+			errorText.classList.add("invalid");
+		}
+		else{
+			pass2.classList.remove("is-invalid")
+			errorText.classList.remove("invalid");
+		}
+	}
+	
+	validatePassword(){
+		var pass1 = document.getElementById("password1"),
+			errorText = document.getElementById("password1_help"),
+			pw = pass1.value;
+
+		// small length, no symbols, no digits, no alphanumeric => ERROR
+		if(pw.length < 8 || !/[^\w \d]/.test(pw) || !/[\d]/.test(pw) || !/[a-z]/i.test(pw)){
+			pass1.classList.add("is-invalid")	
+			errorText.classList.add("invalid");
+		}
+		else{
+			pass1.classList.remove("is-invalid")
+			errorText.classList.remove("invalid");
+		}
+	}
+
 	render() {
 		if (localStorage["user_key"] && localStorage["isLoggedIn"]==="true") {
 			return <Redirect to="/home" />
@@ -126,11 +157,17 @@ class CreateStudent extends Component {
 				</div>
 				<div className="form-group">
 					<label htmlFor="password1">Password</label>
-					<input className="form-control" type="password" id="password1" name="password1" required />
+					<input className="form-control" type="password" id="password1" name="password1" required onChange={this.validatePassword} />
+					<small id="password1_help" className="text-danger">
+          				Password must be at least eight characters, and have an alphabet, digit and symbol. 
+        			</small>
 				</div>
 				<div className="form-group">
 					<label htmlFor="password2">Password match</label>
-					<input className="form-control" type="password" id="password2" name="password2" required />
+					<input className="form-control" type="password" id="password2" name="password2" required onChange={this.checkPasswordMatch} />
+					<small id="password2_help" className="text-danger">
+          				Passwords must match. 
+        			</small>
 				</div>
 				<div className="form-group">
 					<label htmlFor="student_id">Student ID</label>
@@ -183,6 +220,8 @@ class CreateStudent extends Component {
 		var inputElms = document.querySelectorAll(".form-signin input, .form-signin select");
 
 		inputElms.forEach(elm => elm.addEventListener("change", ev => this.handleInput(ev)));
+
+		this.validatePassword();
 	}
 }
 
