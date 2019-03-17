@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import axios from 'axios';
 import Gravatar from 'react-gravatar';
@@ -97,7 +98,9 @@ class Profile extends Component {
             <h1>STUDENT PROFILE</h1>
           </div>
           <div className="row">
-          
+            <div className="col-sm-6 text-right">
+              <a href="/profile/students/edit"><FontAwesomeIcon icon="edit"/></a>
+            </div>
             <div className="col-sm-12 text-center">
               <p>Name: {this.state.user.name}</p>
               <p>Roll Number: {this.state.user.student_id}</p>
@@ -117,7 +120,9 @@ class Profile extends Component {
             <h1>COMPANY PROFILE</h1>
           </div>
           <div className="row">
-          
+            <div className="col-sm-6 text-right">
+              <a href="/profile/companies/edit"><FontAwesomeIcon icon="edit"/></a>
+            </div>
             <div className="col-sm-12 text-center">
               <p>Name: {this.state.user.name}</p>
               <p>Company Id: {this.state.user.company_id}</p>

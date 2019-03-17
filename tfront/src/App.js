@@ -19,6 +19,7 @@ import CreateStudent from './components/CreateStudent';
 import Jobs from './components/Jobs';
 import AddJob from './components/AddJob';
 import DeleteJob from './components/DeleteJob';
+import EditStudent from './components/EditStudent';
 
 // import logo from './logo.svg';
 import './App.css';
@@ -58,6 +59,8 @@ class App extends Component {
                 <Route exact path='/home' component={Home} />
                 <Route exact path='/jobs' component={Jobs} />
                 <Route exact path='/profile' component={Profile} />
+                <Route exact path='/profile/students/edit/' component={EditStudent} />
+                <Route exact path='/profile/companies/edit/' component={Profile} />
                 <Route exact path='/user/:id'  component={User} />
                 <Route exact path='/logout'  component={Logout} />
                 <Route exact path='/jobs/add' component={AddJob} />
