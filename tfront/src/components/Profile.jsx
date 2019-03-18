@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import axios from 'axios';
 import Gravatar from 'react-gravatar';
@@ -18,21 +19,19 @@ class Profile extends Component {
   }
 
   getDetails() {
-    let token = 'Token '+ this.state.key;
     axios({
-      method: 'get',
-      url: 'http://localhost:8000/api/rest-auth/user/',
-      headers: {'Authorization': token}
+      method: 'GET',
+      url: 'http://localhost:8000/api/rest-auth/user',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Token ' + localStorage["user_key"],
+      }
     })
     .then((response)=>{
       console.log(response);
-      return response;
-    })
-    .then((response)=>{
       axios({
         method: 'GET',
         url: 'http://localhost:8000/api/users/users/' + response.data.pk,
-        headers: {'Authorization': token}
       })
       .then((res)=>{
         console.log(res);
@@ -40,26 +39,42 @@ class Profile extends Component {
       })
       .then((res)=>{
         let temp_user = this.state.user;
-        for(let i in temp_user){
+        for(let i in res.data){
           temp_user[i] = res.data[i];
         }
         this.setState({user: temp_user});
         console.log(this.state);
-      })
+      });
 
-      axios({
-        method: 'GET',
-        url: 'http://localhost:8000/api/users/students/' + response.data.pk,
-      })
-      .then((res)=>{
-        let temp_user = this.state.user;
-        for(let j in temp_user){
-          temp_user[j] = res.data[j];
-        }
-        this.setState({user: temp_user});
-        console.log(this.state);
-      })
-    })
+      if(localStorage["user_type"]==1){  
+        axios({
+          method: 'GET',
+          url: 'http://localhost:8000/api/users/students/' + response.data.pk,
+        })
+        .then((res)=>{
+          let temp_user = this.state.user;
+          for(let j in res.data){
+            temp_user[j] = res.data[j];
+          }
+          this.setState({user: temp_user});
+          console.log(this.state);
+        })
+      }
+      else{
+        axios({
+          method: 'GET',
+          url: 'http://localhost:8000/api/users/companies/' + response.data.pk,
+        })
+        .then((res)=>{
+          let temp_user = this.state.user;
+          for(let j in res.data){
+            temp_user[j] = res.data[j];
+          }
+          this.setState({user: temp_user});
+          console.log(this.state);
+        })
+      }
+    });
   }
 
   componentWillMount() {
@@ -75,33 +90,50 @@ class Profile extends Component {
   }
 
   render() {
-    return (
-      <div>
-        {console.log(this.state)}
-        <div className="topFreeze">
-          <h1>PROFILE</h1>
-        </div>
-        <div className="row">
-          <div className="col-sm-12 col-md-3 profile">
-            <Gravatar email={this.state.user.email} size={200}/>
+    if(localStorage["user_type"]==1){
+      return (
+        <div>
+          {console.log(this.state)}
+          <div className="topFreeze">
+            <h1>STUDENT PROFILE</h1>
           </div>
-          <div className="col-sm-12 col-md-9">
-            <p>Name: {this.state.user.name}</p>
-            <p>Username: {this.state.user.username}</p>
-            <p>Email ID: {this.state.user.email}</p>
-            <p>Bio: {this.state.user.bio}</p>
-            <p>School: {this.state.user.school}</p>
+          <div className="row">
+            <div className="col-sm-6 text-right">
+              <a href="/profile/students/edit"><FontAwesomeIcon icon="edit"/></a>
+            </div>
+            <div className="col-sm-12 text-center">
+              <p>Name: {this.state.user.name}</p>
+              <p>Roll Number: {this.state.user.student_id}</p>
+              <p>Nationality: {this.state.user.nationality}</p>
+              <p>Phone Number: {this.state.user.phone_number}</p>
+              <p>City of Residence: {this.state.user.permanent_city_res}</p>
+            </div>
           </div>
         </div>
-        <div class="row">
-          <div class="col-sm-12"><h1>STATISTICS</h1></div>
-          <div class="col-sm-12 col-md-6">Average Rating received: {this.state.user.average_rating_received}</div>
-          <div class="col-sm-12 col-md-6">Average Rating given: {this.state.user.average_rating_given}</div>
+      );
+    }
+    else{
+      return (
+        <div>
+          {console.log(this.state)}
+          <div className="topFreeze">
+            <h1>COMPANY PROFILE</h1>
+          </div>
+          <div className="row">
+            <div className="col-sm-6 text-right">
+              <a href="/profile/companies/edit"><FontAwesomeIcon icon="edit"/></a>
+            </div>
+            <div className="col-sm-12 text-center">
+              <p>Name: {this.state.user.name}</p>
+              <p>Company Id: {this.state.user.company_id}</p>
+              <p>About: {this.state.user.about}</p>
+              <p>Phone Number: {this.state.user.phone_number}</p>
+              <p>Additional POC: {this.state.user.additional_poc}</p>
+            </div>
+          </div>
         </div>
-
-
-      </div>
-    );
+      );
+    }
   }
 }
 
