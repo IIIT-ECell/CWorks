@@ -49,7 +49,7 @@ class Profile extends Component {
       if(localStorage["user_type"]==1){  
         axios({
           method: 'GET',
-          url: 'http://localhost:8000/api/users/students/' + response.data.pk,
+          url: 'http://localhost:8000/api/users/students/' + localStorage["user_id"],
         })
         .then((res)=>{
           let temp_user = this.state.user;

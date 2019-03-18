@@ -1,7 +1,7 @@
-from django.urls import include, path
+from django.urls import include, path, url
 from rest_framework import routers
 
-from .views import StudentViewSet, CompanyViewSet, CustomUserViewSet, JobViewSet
+from .views import StudentViewSet, CompanyViewSet, CustomUserViewSet, JobViewSet, StudentListView
 from .views import StudentAPI, CompanyAPI, CustomUserAPI, JobAPI
 
 router = routers.DefaultRouter()
@@ -17,4 +17,7 @@ urlpatterns = [
     path('company/', CompanyAPI.as_view()),
     path('user/', CustomUserAPI.as_view()),
     path('jobs/', JobAPI.as_view()),
+    url('student/',StudentListView.as_view()),
 ]
+
+
