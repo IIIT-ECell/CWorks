@@ -7,4 +7,3 @@ urlpatterns = [
     path('rest-auth/registration/', include('rest_auth.registration.urls')),
     path('rest-auth/google/', GoogleLogin.as_view(), name='google_login')
 ]
-url('students/(?P<user_id>.+)/$',StudentViewSet.as_view()),

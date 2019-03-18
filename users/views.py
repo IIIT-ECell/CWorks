@@ -1,4 +1,3 @@
-import django_filters.rest_framework
 from rest_framework import viewsets, permissions, generics
 
 from .models import Student, Company, CustomUser , Job
@@ -59,7 +58,10 @@ class JobAPI(generics.RetrieveAPIView):
         return self.request.user
     
 class StudentListView(generics.ListAPIView):
-    
-    model = Student
     serializer_class = StudentSerializer
-    filter_backends = (django_filters.rest_framework.DjangoFilterBackend,)
+    def get_student(self):
+        """
+
+        """
+        user_id = self.kwargs['user_id']
+        return Student.objects.filter(user_id=user_id)

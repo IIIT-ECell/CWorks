@@ -1,4 +1,4 @@
-from django.urls import include, path, url
+from django.urls import include, path
 from rest_framework import routers
 
 from .views import StudentViewSet, CompanyViewSet, CustomUserViewSet, JobViewSet, StudentListView
@@ -17,7 +17,7 @@ urlpatterns = [
     path('company/', CompanyAPI.as_view()),
     path('user/', CustomUserAPI.as_view()),
     path('jobs/', JobAPI.as_view()),
-    url('student/',StudentListView.as_view()),
+    path('student/(?<user_id>.+)/$',StudentListView.as_view()),
 ]
 
 
