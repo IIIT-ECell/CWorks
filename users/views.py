@@ -58,10 +58,21 @@ class JobAPI(generics.RetrieveAPIView):
         return self.request.user
     
 class StudentListView(generics.ListAPIView):
+    permission_classes = [permissions.AllowAny, ]
     serializer_class = StudentSerializer
-    def get_student(self):
+    def get_queryset(self):
         """
 
         """
         user_id = self.kwargs['user_id']
         return Student.objects.filter(user_id=user_id)
+
+class CompanyListView(generics.ListAPIView):
+    permission_classes = [permissions.AllowAny, ]
+    serializer_class = CompanySerializer
+    def get_queryset(self):
+        """
+
+        """
+        user_id = self.kwargs['user_id']
+        return Company.objects.filter(user_id=user_id)
