@@ -76,6 +76,8 @@ class EditStudent extends Component{
                 nationality: this.state.user.nationality,
                 phone_number: this.state.user.phone_number,
                 permanent_city_res: this.state.user.permanent_city_res,
+                gender:this.state.user.gender,
+                year_of_study:this.state.user.year_of_study,
                 user:localStorage["pk"],
             }
         })
