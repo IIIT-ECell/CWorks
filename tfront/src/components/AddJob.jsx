@@ -19,8 +19,8 @@ class AddJob extends Component{
             url: "http://localhost:8000/api/users/comptest/"+localStorage['pk']+"/",
         })
         .then((response)=>{
-            console.log(response.data[0].id);
-            this.setState({formData:response.data[0]})
+            console.log(response.data[0]);
+            this.formData=response.data[0];
         })
     }
 
