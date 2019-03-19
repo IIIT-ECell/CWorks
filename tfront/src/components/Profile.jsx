@@ -49,12 +49,12 @@ class Profile extends Component {
       if(localStorage["user_type"]==1){  
         axios({
           method: 'GET',
-          url: 'http://localhost:8000/api/users/students/' + localStorage["user_id"],
+          url: 'http://localhost:8000/api/users/stutest/' + localStorage["pk"],
         })
         .then((res)=>{
           let temp_user = this.state.user;
-          for(let j in res.data){
-            temp_user[j] = res.data[j];
+          for(let j in res.data[0]){
+            temp_user[j] = res.data[0][j];
           }
           this.setState({user: temp_user});
           console.log(this.state);
@@ -63,12 +63,12 @@ class Profile extends Component {
       else{
         axios({
           method: 'GET',
-          url: 'http://localhost:8000/api/users/companies/' + response.data.pk,
+          url: 'http://localhost:8000/api/users/comptest/' + response.data.pk,
         })
         .then((res)=>{
           let temp_user = this.state.user;
-          for(let j in res.data){
-            temp_user[j] = res.data[j];
+          for(let j in res.data[0]){
+            temp_user[j] = res.data[0][j];
           }
           this.setState({user: temp_user});
           console.log(this.state);

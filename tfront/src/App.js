@@ -25,6 +25,7 @@ import EditStudent from './components/EditStudent';
 import './App.css';
 import CreateCompany from './components/CreateCompany';
 import EditJob from './components/EditJob';
+import EditCompany from './components/EditCompany';
 
 library.add(faIgloo);
 library.add(faEdit);
@@ -60,7 +61,7 @@ class App extends Component {
                 <Route exact path='/jobs' component={Jobs} />
                 <Route exact path='/profile' component={Profile} />
                 <Route exact path='/profile/students/edit/' component={EditStudent} />
-                <Route exact path='/profile/companies/edit/' component={Profile} />
+                <Route exact path='/profile/companies/edit/' component={EditCompany} />
                 <Route exact path='/user/:id'  component={User} />
                 <Route exact path='/logout'  component={Logout} />
                 <Route exact path='/jobs/add' component={AddJob} />

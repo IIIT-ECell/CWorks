@@ -12,6 +12,18 @@ class AddJob extends Component{
         this.handleInput = this.handleInput.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
     }
+
+    componentDidMount(event){
+        axios({
+            method:'GET',
+            url: "http://localhost:8000/api/users/comptest/"+localStorage['pk']+"/",
+        })
+        .then((response)=>{
+            console.log(response.data[0].id);
+            this.setState({formData:response.data[0]})
+        })
+    }
+
     handleInput(event) {
         event.preventDefault();
         console.log(this.formData);
@@ -33,7 +45,7 @@ class AddJob extends Component{
                 stipend: this.formData.stipend,
                 language: this.formData.language,
                 category: this.formData.category,
-                company_id: localStorage["pk"],
+                company_id: this.formData.id,
             },
             headers: {
                 'Content-Type': 'application/json',

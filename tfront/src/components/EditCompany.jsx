@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import axios from 'axios';
 import "../styles/home.css";
 
-class EditStudent extends Component{
+class EditCompany extends Component{
     constructor(){
         super();
         this.state = {
@@ -41,7 +41,7 @@ class EditStudent extends Component{
 
                 axios({
                     method: 'GET',
-                    url: 'http://localhost:8000/api/users/stutest/' + response.data.id,
+                    url: 'http://localhost:8000/api/users/comptest/' + response.data.id,
                 })
                 .then((response)=>{
                     console.log(response.data);
@@ -66,22 +66,27 @@ class EditStudent extends Component{
 
     handleSubmit(event){
         event.preventDefault();
+        console.log(this.state.user.name);
+        console.log(this.state.user.company_id);
+        console.log(this.state.user.about);
+        console.log(this.state.user.additional_poc);
+        console.log(localStorage["pk"]);
         axios({
             method:"PUT",
-            url:"http://localhost:8000/api/users/students/"+this.state.user.id+"/",
+            url:"http://localhost:8000/api/users/companies/"+this.state.user.id+"/",
             data:{
                 id:this.state.user.id,
                 name: this.state.user.name,
-                student_id: this.state.user.student_id,
-                nationality: this.state.user.nationality,
-                phone_number: this.state.user.phone_number,
-                permanent_city_res: this.state.user.permanent_city_res,
+                company_id: this.state.user.company_id,
+                about: this.state.user.about,
+                additional_poc: this.state.user.additional_poc,
                 user:localStorage["pk"],
             }
         })
         .then((response)=>{
             this.props.history.push('/profile');
         })
+
     }
 
     render(){
@@ -94,27 +99,21 @@ class EditStudent extends Component{
                     </div>
                 </div>
                 <div className="form-group">
-                    <label className="col-sm-2 control-label ">Roll Number</label>
+                    <label className="col-sm-2 control-label ">About</label>
                     <div className="col-sm-10">
-                        <input name="student_id" id="student_id" className="form-control" type="number" onChange={this.handleInput} value={this.state.user.student_id}/>
+                        <input name="about" id="about" className="form-control" type="text" onChange={this.handleInput} value={this.state.user.about}/>
                     </div>
                 </div>
                 <div className="form-group">
-                    <label className="col-sm-2 control-label ">Nationality</label>
+                    <label className="col-sm-2 control-label ">Additional POC</label>
                     <div className="col-sm-10">
-                        <input name="nationality" id="nationality" className="form-control" type="text" onChange={this.handleInput} value={this.state.user.nationality}/>
+                        <input name="additional_poc" id="additional_poc" className="form-control" type="text" onChange={this.handleInput} value={this.state.user.additional_poc}/>
                     </div>
                 </div>
                 <div className="form-group">
                     <label className="col-sm-2 control-label">Phone Number</label>
                     <div className="col-sm-10">
                         <input name="phone_number" id="phone_number" className="form-control" type="text" onChange={this.handleInput} value={this.state.user.phone_number}/>
-                    </div>
-                </div>
-                <div className="form-group">
-                    <label className="col-sm-2 control-label">City of Residence</label>
-                    <div className="col-sm-10">
-                        <input name="permanent_city_res" id="permanent_city_res" className="form-control" type="text" onChange={this.handleInput} value={this.state.user.permanent_city_res}/>
                     </div>
                 </div>
                 <div className="form-group">
@@ -127,4 +126,4 @@ class EditStudent extends Component{
 
 }
 
-export default EditStudent;
+export default EditCompany;
