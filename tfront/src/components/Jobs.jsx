@@ -70,13 +70,18 @@ class Home extends Component {
     return (
       <div>
         <h1>JOBS</h1>
-        <form className="col-md-6">
-          <select onChange={this.JobSort} className="form-control">
-            <option value="random">Random</option>
-            <option value="stipend_desc">Most Paying</option>
-            <option value="job_date_asc">Latest</option>
-          </select>
-        </form>
+        <div className="row">
+          <form className="col-md-6">
+            <select onChange={this.JobSort} className="form-control">
+              <option value="random">Random</option>
+              <option value="stipend_desc">Most Paying</option>
+              <option value="job_date_asc">Latest</option>
+            </select>
+          </form>
+          <div className="col-md-6">
+            <a href="/jobs/add"><FontAwesomeIcon icon="plus"/></a>
+          </div>
+        </div>
         <table className="table" id="jobs_table">
           <thead>
             <tr>
@@ -89,8 +94,8 @@ class Home extends Component {
               <th scope="col">Category</th>
               <th scope="col">Skill</th>
               <th scope="col">Company</th>
-              <th scope="col">Edit</th>
-              <th scope="col">Delete</th>
+              { localStorage["user_type"]==2 && <th scope="col">Edit</th>}
+              { localStorage["user_type"]==2 && <th scope="col">Delete</th>}
             </tr>
           </thead>
           <tbody id="job_table_body">
@@ -106,8 +111,9 @@ class Home extends Component {
                 <td>{item.category}</td>
                 <td>{item.skill}</td>
                 <td>{item.company_name}</td>
-                <td><a href={"/jobs/edit/"+item.company_id+"/"+item.id}><FontAwesomeIcon icon="edit"/></a></td>
-                <td><a href={"/jobs/delete/"+item.id}><FontAwesomeIcon icon="trash"/></a></td>
+                { localStorage["user_type"] == 2 && <td><a href={"/jobs/edit/"+item.company_id+"/"+item.id}><FontAwesomeIcon icon="edit"/></a></td>
+                }
+                { localStorage["user_type"] == 2 && <td><a href={"/jobs/delete/"+item.id}><FontAwesomeIcon icon="trash"/></a></td>}
               </tr>
             );
           })}

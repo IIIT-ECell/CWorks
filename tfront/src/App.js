@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faIgloo, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { faIgloo, faEdit, faTrash, faPlus } from '@fortawesome/free-solid-svg-icons'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import $ from 'jquery';
@@ -30,6 +30,8 @@ import EditCompany from './components/EditCompany';
 library.add(faIgloo);
 library.add(faEdit);
 library.add(faTrash);
+library.add(faPlus);
+
 class App extends Component {
   render() {
     return (
