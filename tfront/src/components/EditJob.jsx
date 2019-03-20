@@ -9,7 +9,8 @@ class EditJob extends Component{
     constructor() {
         super();
         this.state = {
-            formData:{}
+            formData:{},
+            compData:{}
         }
         this.handleInput = this.handleInput.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
@@ -62,8 +63,24 @@ class EditJob extends Component{
         })
         .then((response)=>{
             console.log(response.data);
-            this.setState({formData:response.data}); 
+            var temp_data = this.state.formData;
+            for(var i in response.data)
+                temp_data[i]=response.data[i];
+            this.setState({formData:temp_data}); 
             console.log(this.state);
+        })
+    }
+    componentWillMount(){
+        axios({
+            method:"GET",
+            url:"http://localhost:8000/api/users/comptest/"+localStorage["pk"]+"/",
+        })
+        .then((resp)=>{ 
+            this.setState({compData:resp.data[0]}); 
+            console.log(this.state);
+            if(this.state.compData.id!=this.props.match.params.company_id){
+                this.props.history.push('/jobs');
+            }
         })
     }
 
@@ -76,9 +93,9 @@ class EditJob extends Component{
             return <Redirect to="/jobs"/>
         }
 
-        if(localStorage["pk"]!=this.props.match.params.company_id){
-            return <Redirect to="/jobs"/>
-        }
+        // if(this.state.compData.id!=this.props.match.params.company_id){
+        //     return <Redirect to="/jobs"/>
+        // }
 
         return(
             <form onSubmit={this.handleSubmit} className="form-signin">

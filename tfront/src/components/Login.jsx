@@ -64,6 +64,7 @@ class Login extends Component {
             .then((resp)=>{
               console.log(resp);
               localStorage["user_type"]=resp.data.user_type;
+              localStorage["user_id"]=resp.data.id;
             })
             window.location.reload();
           })

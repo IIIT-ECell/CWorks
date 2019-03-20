@@ -97,6 +97,13 @@ class Student(models.Model):
     permanent_city_res = models.CharField(blank=True, max_length=100)
     nationality = models.CharField(blank=True, max_length=100)
 
+    def get_student(self):
+        """
+        This view should return the student with a particular user_id
+        """
+        user_id = self.kwargs['user_id']
+        return Student.objects.filter(user_id=user_id)
+
     def __str__(self):
         return self.email
 
@@ -146,6 +153,8 @@ class Job(models.Model):
     stipend = models.IntegerField()
     language = models.CharField(max_length=50)
     category = models.CharField(max_length=10)
+
+
     def __str__(self):
         return self.job_name
 
