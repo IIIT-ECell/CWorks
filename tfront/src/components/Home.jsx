@@ -18,7 +18,7 @@ class Home extends Component {
   componentDidMount(){
     axios({
       method: 'get',
-      url: 'http://localhost:8000/api/users/jobs/',
+      url: 'http://10.1.135.18:8000/api/users/jobs/',
     })
     .then((response)=>{
       console.log(response);

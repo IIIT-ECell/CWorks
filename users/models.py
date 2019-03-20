@@ -124,7 +124,7 @@ class Company(models.Model):
     company_id = models.CharField(blank=False, max_length=255)
     about = models.CharField(blank=False, max_length=10000)
     # phone_number = models.CharField(blank=False, max_length=10)
-
+    email = models.CharField(blank=False,max_length=255, default="")
     additional_poc = models.CharField(blank=True, max_length=512)
 
     def __str__(self):

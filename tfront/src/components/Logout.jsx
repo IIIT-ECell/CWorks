@@ -14,7 +14,7 @@ class Login extends Component {
     event.preventDefault();
 
     axios
-      .post("http://localhost:8000/api/rest-auth/logout/")
+      .post("http://10.1.135.18:8000/api/rest-auth/logout/")
       .then( response => {
         console.log(response);
         return response;
