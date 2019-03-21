@@ -25,7 +25,7 @@ SECRET_KEY = '3ucz++zdj1ffhj=emi=g00ctk489s*$df*l@q$ql#jaazdti5^'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['10.1.135.18']
 
 
 # Application definition
@@ -78,7 +78,7 @@ MIDDLEWARE = [
 ]
 
 CORS_ORIGIN_WHITELIST = (
-    'localhost:3000/'
+    '10.1.135.18:3000/'
 )
 
 ROOT_URLCONF = 'cworks.urls'

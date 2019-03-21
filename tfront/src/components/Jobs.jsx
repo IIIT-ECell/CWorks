@@ -41,7 +41,7 @@ class Home extends Component {
   componentDidMount(){
     axios({
       method: 'get',
-      url: 'http://localhost:8000/api/users/jobs/',
+      url: 'http://10.1.135.18:8000/api/users/jobs/',
     })
     .then((response)=>{
       console.log(response.data);
@@ -50,7 +50,7 @@ class Home extends Component {
       for(let i in this.state.jobs){
         axios({
           method: 'get',
-          url: 'http://localhost:8000/api/users/companies/'+ this.state.jobs[i].company_id +'/',
+          url: 'http://10.1.135.18:8000/api/users/companies/'+ this.state.jobs[i].company_id +'/',
         })
         .then((res)=>{
           let temp_jobs = this.state.jobs;
@@ -110,7 +110,7 @@ class Home extends Component {
                 <td>{item.language}</td>
                 <td>{item.category}</td>
                 <td>{item.skill}</td>
-                <td>{item.company_name}</td>
+                <td><a href={"/profile/"+item.company_id}>{item.company_name}</a></td>
                 { localStorage["user_type"] == 2 && <td><a href={"/jobs/edit/"+item.company_id+"/"+item.id}><FontAwesomeIcon icon="edit"/></a></td>
                 }
                 { localStorage["user_type"] == 2 && <td><a href={"/jobs/delete/"+item.id}><FontAwesomeIcon icon="trash"/></a></td>}

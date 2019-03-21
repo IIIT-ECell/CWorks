@@ -18,7 +18,7 @@ class EditStudent extends Component{
     componentDidMount(){
         axios({
             method: 'GET',
-            url: 'http://localhost:8000/api/rest-auth/user',
+            url: 'http://10.1.135.18:8000/api/rest-auth/user',
             headers: {
               'Content-Type': 'application/json',
               'Authorization': 'Token ' + localStorage["user_key"],
@@ -28,7 +28,7 @@ class EditStudent extends Component{
             console.log(response);
             axios({
                 method: 'GET',
-                url: 'http://localhost:8000/api/users/users/' + response.data.pk,
+                url: 'http://10.1.135.18:8000/api/users/users/' + response.data.pk,
             })
             .then((response)=>{
                 console.log(response.data);
@@ -41,7 +41,7 @@ class EditStudent extends Component{
 
                 axios({
                     method: 'GET',
-                    url: 'http://localhost:8000/api/users/stutest/' + response.data.id,
+                    url: 'http://10.1.135.18:8000/api/users/stutest/' + response.data.id,
                 })
                 .then((response)=>{
                     console.log(response.data);
@@ -68,7 +68,7 @@ class EditStudent extends Component{
         event.preventDefault();
         axios({
             method:"PUT",
-            url:"http://localhost:8000/api/users/students/"+this.state.user.id+"/",
+            url:"http://10.1.135.18:8000/api/users/students/"+this.state.user.id+"/",
             data:{
                 id:this.state.user.id,
                 name: this.state.user.name,

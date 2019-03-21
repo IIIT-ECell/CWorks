@@ -30,7 +30,7 @@ class Login extends Component {
 
     axios
       .post(
-        "http://localhost:8000/api/rest-auth/login/",
+        "http://10.1.135.18:8000/api/rest-auth/login/",
         fd
       )
       .then( response => {
@@ -45,7 +45,7 @@ class Login extends Component {
           console.log("While logging in:");
           axios({
 						method: "GET",
-						url: "http://localhost:8000/api/rest-auth/user",
+						url: "http://10.1.135.18:8000/api/rest-auth/user",
 						headers: {
 							'Content-Type': 'application/json',
 							'Authorization': 'Token ' + response.data.key
@@ -56,7 +56,7 @@ class Login extends Component {
             console.log(res.data);
             axios({
               method: "GET",
-              url: "http://localhost:8000/api/users/users/"+res.data.pk+"/",
+              url: "http://10.1.135.18:8000/api/users/users/"+res.data.pk+"/",
               headers: {
                 'Content-Type': 'application/json',
               }
@@ -66,15 +66,23 @@ class Login extends Component {
               localStorage["user_type"]=resp.data.user_type;
               localStorage["user_id"]=resp.data.id;
             })
-            window.location.reload();
+            this.props.history.push('/home');
           })
         }
       })
       .catch( response => {
         console.log("Error");
         console.error(response);
+        this.setState({error:response})
       })
 
+  }
+
+  componentDidMount(){
+    localStorage["user_type"]="";
+    localStorage["user_id"]="";
+    localStorage["pk"]="";
+    localStorage["isLoggedIn"]=false;
   }
 
   render() {
