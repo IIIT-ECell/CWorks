@@ -10,10 +10,16 @@ class Register extends Component {
       return <Redirect to="/home" />
     }
     return (
-      <div className="col-md-6">
-        <h1>Register as:</h1>
-        <Link to='/register/student'>Student</Link>
-        <Link to='/register/company'>Company</Link>
+      <div className="row p-5">
+        <div className="col-sm-12 text-center">
+          <h1>Register as:</h1>
+        </div>
+        <div className="col-md-6 text-center">
+          <button className="btn btn-info"><Link to='/register/student' className="text-white"><h1>Student</h1></Link></button>
+        </div>
+        <div className="col-md-6 text-center">
+          <button className="btn btn-info"><Link to='/register/company' className="text-white"><h1>Company</h1></Link></button>
+        </div>
       </div>
     );
   }
