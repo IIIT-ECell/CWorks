@@ -78,9 +78,10 @@ class Home extends Component {
               <option value="job_date_asc">Latest</option>
             </select>
           </form>
-          <div className="col-md-6">
+
+          { localStorage["user_type"]==2 && <div className="col-md-6 text-center">
             <a href="/jobs/add"><FontAwesomeIcon icon="plus"/></a>
-          </div>
+          </div>}
         </div>
         <table className="table" id="jobs_table">
           <thead>
