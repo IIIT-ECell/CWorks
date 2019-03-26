@@ -4,7 +4,7 @@ cffi==1.11.5
 chardet==3.0.4
 cryptography==2.3.1
 defusedxml==0.5.0
-Django==2.1.5
+Django==2.1.7
 django-allauth==0.37.1
 django-cas-client==1.5.0
 django-cas-server==1.0.0
