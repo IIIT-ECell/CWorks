@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
+import django_heroku
 
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
@@ -165,3 +166,6 @@ STATICFILES_DIRS = (
     os.path.join(PROJECT_ROOT, 'static'),
 )
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
+# Activate Django-Heroku.
+django_heroku.settings(locals())
