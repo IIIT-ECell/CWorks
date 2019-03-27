@@ -33,3 +33,11 @@ nav {
   justify-content: center;
   align-items: center;
 }
+
+.centered {
+    display: flex;
+    height: auto;
+    min-height: 90vh;
+    justify-content: center;
+    align-items: center;
+}

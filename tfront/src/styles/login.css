@@ -3,16 +3,10 @@ form.form-signin {
     width: 100%;
     border-radius: 0.2rem;
     max-width: 580px;
-    position: absolute;
     text-align: center;
     color: white;
-    top: 10%;
-    right: 0;
-    left: 0;
-    z-index: 20;
-    margin: auto;
+    margin: 1rem auto;
     padding-bottom: 2rem;
-    margin-bottom: 1rem;
 }
 
 .logoimg {

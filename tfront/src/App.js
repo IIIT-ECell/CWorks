@@ -52,7 +52,7 @@ class App extends Component {
                 <Link to='/logout' className='nav-item nav-link'>Logout</Link>
               </div>
             </nav>
-            <div className="container">
+            <div className="container centered">
               <Switch>
                 <Route exact path='/' component={Login} />
                 <Route exact path='/login' component={Login} />

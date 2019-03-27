@@ -1,0 +1,9 @@
+.centered {
+    width: 75%;
+    margin: auto;
+    padding: 3rem;
+}
+
+.btn {
+    background-color: #1a4160;
+}
