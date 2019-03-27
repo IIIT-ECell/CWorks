@@ -34,6 +34,7 @@ library.add(faPlus);
 
 class App extends Component {
   render() {
+    console.log(localStorage["isLoggedIn"]);
     return (
       <div className="App">
         <Router>
@@ -44,12 +45,22 @@ class App extends Component {
                 <span className="navbar-toggler-icon"></span>
               </button>
               <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <Link to='/login' className='nav-item nav-link'>Login</Link>
+
+                {
+                  localStorage["isLoggedIn"] === "false" &&
+                    <Link to='/login' className='nav-item nav-link'>Login</Link>
+                }
+
                 <Link to='/register' className='nav-item nav-link'>Register</Link>
                 <Link to='/home' className='nav-item nav-link'>Home</Link>
                 <Link to='/jobs' className='nav-item nav-link'>Jobs</Link>
                 <Link to='/profile' className='nav-item nav-link'>Profile</Link>
-                <Link to='/logout' className='nav-item nav-link'>Logout</Link>
+
+                {
+                  localStorage["isLoggedIn"] === "true" &&
+                    <Link to='/logout' className='nav-item nav-link'>Logout</Link>
+                }
+
               </div>
             </nav>
             <div className="container centered">
