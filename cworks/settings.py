@@ -178,3 +178,4 @@ STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 # Activate Django-Heroku.
 django_heroku.settings(locals())
+DATABASE_URL=sqlite:///db.sqlite3
