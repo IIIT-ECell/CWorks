@@ -38,7 +38,7 @@ class Login extends Component {
         fd.append("password", this.formData.password);
 
         axios.post(
-            "http://10.1.135.18:8000/api/rest-auth/login/",
+            "http://abhigyanghosh30.pythonanywhere.com/api/rest-auth/login/",
             fd
         ).then( response => {
             console.log(response);
@@ -51,7 +51,7 @@ class Login extends Component {
                 console.log("While logging in:");
                 axios({
                     method: "GET",
-                    url: "http://10.1.135.18:8000/api/rest-auth/user",
+                    url: "http://abhigyanghosh30.pythonanywhere.com/api/rest-auth/user",
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': 'Token ' + response.data.key
@@ -61,7 +61,7 @@ class Login extends Component {
                     console.log(res.data);
                     axios({
                         method: "GET",
-                        url: "http://10.1.135.18:8000/api/users/users/"+res.data.pk+"/",
+                        url: "http://abhigyanghosh30.pythonanywhere.com/api/users/users/"+res.data.pk+"/",
                         headers: {
                             'Content-Type': 'application/json',
                         }

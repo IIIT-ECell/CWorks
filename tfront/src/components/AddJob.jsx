@@ -16,7 +16,7 @@ class AddJob extends Component{
     componentDidMount(event){
         axios({
             method:'GET',
-            url: "http://10.1.135.18:8000/api/users/comptest/"+localStorage['pk']+"/",
+            url: "http://abhigyanghosh30.pythonanywhere.com/api/users/comptest/"+localStorage['pk']+"/",
         })
         .then((response)=>{
             console.log(response.data[0]);
@@ -35,7 +35,7 @@ class AddJob extends Component{
         console.log(this.formData);
         axios({
             method: 'POST',
-            url: "http://10.1.135.18:8000/api/users/jobs/",
+            url: "http://abhigyanghosh30.pythonanywhere.com/api/users/jobs/",
             data:{
                 job_name: this.formData.job_name,
                 description: this.formData.description,

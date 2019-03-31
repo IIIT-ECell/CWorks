@@ -32,7 +32,7 @@ class CreateCompany extends Component {
         // console.log(fd1);
         axios({
             method:"POST",
-			url:"http://10.1.135.18:8000/api/rest-auth/registration/",
+			url:"http://abhigyanghosh30.pythonanywhere.com/api/rest-auth/registration/",
             data:{
                 username: this.formData['username'],
                 email: this.formData['email'],
@@ -47,7 +47,7 @@ class CreateCompany extends Component {
                 localStorage["user_key"]=response.data.key;
                 axios({
                         method: "GET",
-						url: "http://10.1.135.18:8000/api/rest-auth/user",
+						url: "http://abhigyanghosh30.pythonanywhere.com/api/rest-auth/user",
                         headers: {
                             'Content-Type': 'application/json',
                             'Authorization': 'Token ' + response.data.key
@@ -59,7 +59,7 @@ class CreateCompany extends Component {
                         localStorage["pk"]=response.data.pk;
                         axios({
                             method: 'POST',
-							url: "http://10.1.135.18:8000/api/users/companies/",
+							url: "http://abhigyanghosh30.pythonanywhere.com/api/users/companies/",
                             data: {
                                 name: this.formData.name,
                                 company_id: this.formData.company_id,
@@ -80,7 +80,7 @@ class CreateCompany extends Component {
                         })
                         axios({
                             method:"PUT",
-							url: "http://10.1.135.18:8000/api/users/users/"+response.data.pk+"/",
+							url: "http://abhigyanghosh30.pythonanywhere.com/api/users/users/"+response.data.pk+"/",
                             headers: {
                                 'Content-Type': 'application/json',
                             },

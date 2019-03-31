@@ -21,7 +21,7 @@ class Profile extends Component {
   getDetails() {
     axios({
       method: 'GET',
-      url: 'http://10.1.135.18:8000/api/rest-auth/user',
+      url: 'http://abhigyanghosh30.pythonanywhere.com/api/rest-auth/user',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Token ' + localStorage["user_key"],
@@ -31,7 +31,7 @@ class Profile extends Component {
       console.log(response);
       axios({
         method: 'GET',
-        url: 'http://10.1.135.18:8000/api/users/users/' + response.data.pk,
+        url: 'http://abhigyanghosh30.pythonanywhere.com/api/users/users/' + response.data.pk,
       })
       .then((res)=>{
         console.log(res);
@@ -49,7 +49,7 @@ class Profile extends Component {
       if(localStorage["user_type"]==1){  
         axios({
           method: 'GET',
-          url: 'http://10.1.135.18:8000/api/users/stutest/' + localStorage["pk"],
+          url: 'http://abhigyanghosh30.pythonanywhere.com/api/users/stutest/' + localStorage["pk"],
         })
         .then((res)=>{
           let temp_user = this.state.user;
@@ -63,7 +63,7 @@ class Profile extends Component {
       else{
         axios({
           method: 'GET',
-          url: 'http://10.1.135.18:8000/api/users/comptest/' + response.data.pk,
+          url: 'http://abhigyanghosh30.pythonanywhere.com/api/users/comptest/' + response.data.pk,
         })
         .then((res)=>{
           let temp_user = this.state.user;

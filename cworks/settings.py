@@ -25,7 +25,7 @@ SECRET_KEY = '3ucz++zdj1ffhj=emi=g00ctk489s*$df*l@q$ql#jaazdti5^'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['10.1.135.18']
+ALLOWED_HOSTS = ['127.0.0.1','abhigyanghosh30.pythonanywhere.com','ecell.iiit.ac.in']
 
 
 # Application definition
@@ -78,7 +78,7 @@ MIDDLEWARE = [
 ]
 
 CORS_ORIGIN_WHITELIST = (
-    '10.1.135.18:3000/'
+    'ecell.iiit.ac.in:80/','127.0.0.1:3000'
 )
 
 ROOT_URLCONF = 'cworks.urls'
