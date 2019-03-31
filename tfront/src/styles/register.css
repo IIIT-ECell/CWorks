@@ -1,9 +1,24 @@
-.centered {
-    width: 75%;
-    margin: auto;
-    padding: 3rem;
+.btn {
+    background-color: #e23744;
+    border: none;
+    color: #fff;
 }
 
-.btn {
-    background-color: #1a4160;
+.btn:hover {
+    background-color: #f5a623;
+    color: #1c1c1c;
 }
+
+h1 {
+    color: #f0f1f4;
+}
+
+.trial {
+    width: 85%;
+    margin: auto;
+    padding: 10%;
+    border: 2px solid #e23744;
+    background: #36394a;
+    border-radius: 20px;
+}
+
