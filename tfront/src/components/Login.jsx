@@ -43,6 +43,7 @@ class Login extends Component {
             data:fd,
             headers:{
                 'Access-Control-Allow-Origin':'https://abhigyanghosh30.pythonanywhere.com',
+                'Content-Type': 'application/json',
             }
 
         }

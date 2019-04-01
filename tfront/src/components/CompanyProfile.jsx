@@ -20,6 +20,10 @@ class CompanyProfile extends Component {
     axios({
       method: 'GET',
       url: 'https://abhigyanghosh30.pythonanywhere.com/api/users/companies/' + this.props.match.params.company_id+"/",
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin':'https://abhigyanghosh30.pythonanywhere.com',
+      }
     })
     .then((response)=>{
       console.log("comptest");
@@ -31,7 +35,11 @@ class CompanyProfile extends Component {
       this.setState({user:temp_user});
       axios({
         method:'GET',
-        url:'https://abhigyanghosh30.pythonanywhere.com/api/users/users/' + this.state.user.user
+        url:'https://abhigyanghosh30.pythonanywhere.com/api/users/users/' + this.state.user.user,
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin':'https://abhigyanghosh30.pythonanywhere.com',
+        }
       })
       .then((response)=>{
         var new_user = this.state.user;

@@ -41,6 +41,10 @@ class CreateStudent extends Component {
                 email: this.formData['email'],
                 password1: this.formData['password1'],
                 password2: this.formData['password2'],
+            },
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin':'https://abhigyanghosh30.pythonanywhere.com',
             }
         })
         .then(response => {
@@ -53,7 +57,8 @@ class CreateStudent extends Component {
 						url: "https://abhigyanghosh30.pythonanywhere.com/api/rest-auth/user",
                         headers: {
                             'Content-Type': 'application/json',
-                            'Authorization': 'Token ' + response.data.key
+                            'Authorization': 'Token ' + response.data.key,
+                            'Access-Control-Allow-Origin':'https://abhigyanghosh30.pythonanywhere.com',
                         }
                 })
                 .then(response => {
@@ -68,6 +73,10 @@ class CreateStudent extends Component {
                             nationality: this.formData.nationality,
                             year_of_study: this.formData.year_of_study,
                             user: response.data.pk,
+                        },
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Access-Control-Allow-Origin':'https://abhigyanghosh30.pythonanywhere.com',
                         }
                     })
                     .then(response => {
@@ -82,15 +91,16 @@ class CreateStudent extends Component {
                     axios({
                         method:"PUT",
 						url: "https://abhigyanghosh30.pythonanywhere.com/api/users/users/"+response.data.pk+"/",
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
                         data: {
                             id: response.data.pk,
                             user_type: 1,
                             name: this.formData.name,
                             phone_number: this.formData.phone_number,
-                        }
+                        },
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Access-Control-Allow-Origin':'https://abhigyanghosh30.pythonanywhere.com',
+                        },
                     })
                 })
             }

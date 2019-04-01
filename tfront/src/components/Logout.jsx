@@ -13,8 +13,14 @@ class Login extends Component {
   handleSubmit(event) {
     event.preventDefault();
 
-    axios
-      .post("https://abhigyanghosh30.pythonanywhere.com/api/rest-auth/logout/")
+    axios({
+      method:"POST",
+      url:"https://abhigyanghosh30.pythonanywhere.com/api/rest-auth/logout/",
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin':'https://abhigyanghosh30.pythonanywhere.com',
+      },
+    })
       .then( response => {
         console.log(response);
         return response;

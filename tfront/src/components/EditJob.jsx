@@ -43,7 +43,8 @@ class EditJob extends Component{
             },
             headers: {
                 'Content-Type': 'application/json',
-            }
+                'Access-Control-Allow-Origin':'https://abhigyanghosh30.pythonanywhere.com',
+            },
         })
         .then((response)=>{
             this.props.history.push("/jobs");
@@ -60,6 +61,10 @@ class EditJob extends Component{
         axios({
             method:"GET",
             url:"https://abhigyanghosh30.pythonanywhere.com/api/users/jobs/"+id,
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin':'https://abhigyanghosh30.pythonanywhere.com',
+            },
         })
         .then((response)=>{
             console.log(response.data);
@@ -74,6 +79,10 @@ class EditJob extends Component{
         axios({
             method:"GET",
             url:"https://abhigyanghosh30.pythonanywhere.com/api/users/comptest/"+localStorage["pk"]+"/",
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin':'https://abhigyanghosh30.pythonanywhere.com',
+            },
         })
         .then((resp)=>{ 
             this.setState({compData:resp.data[0]}); 

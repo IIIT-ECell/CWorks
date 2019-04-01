@@ -22,6 +22,7 @@ class EditStudent extends Component{
             headers: {
               'Content-Type': 'application/json',
               'Authorization': 'Token ' + localStorage["user_key"],
+              'Access-Control-Allow-Origin':'https://abhigyanghosh30.pythonanywhere.com',
             }
         })
         .then((response)=>{
@@ -29,6 +30,10 @@ class EditStudent extends Component{
             axios({
                 method: 'GET',
                 url: 'https://abhigyanghosh30.pythonanywhere.com/api/users/users/' + response.data.pk,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin':'https://abhigyanghosh30.pythonanywhere.com',
+                },
             })
             .then((response)=>{
                 console.log(response.data);
@@ -42,6 +47,10 @@ class EditStudent extends Component{
                 axios({
                     method: 'GET',
                     url: 'https://abhigyanghosh30.pythonanywhere.com/api/users/stutest/' + response.data.id,
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin':'https://abhigyanghosh30.pythonanywhere.com',
+                    },
                 })
                 .then((response)=>{
                     console.log(response.data);
@@ -79,7 +88,11 @@ class EditStudent extends Component{
                 gender:this.state.user.gender,
                 year_of_study:this.state.user.year_of_study,
                 user:localStorage["pk"],
-            }
+            },
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin':'https://abhigyanghosh30.pythonanywhere.com',
+            },
         })
         .then((response)=>{
             this.props.history.push('/profile');

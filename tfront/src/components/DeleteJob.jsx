@@ -16,6 +16,10 @@ class DeleteJob extends Component{
             axios({
                 method:'DELETE',
                 url:"https://abhigyanghosh30.pythonanywhere.com/api/users/jobs/"+this.props.match.params.id,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin':'https://abhigyanghosh30.pythonanywhere.com',
+                },
             })
             .then((response)=>{
                 this.props.history.push("/jobs");
@@ -29,6 +33,10 @@ class DeleteJob extends Component{
         axios({
             method:'GET',
             url:"https://abhigyanghosh30.pythonanywhere.com/api/users/jobs/"+this.props.match.params.id,
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin':'https://abhigyanghosh30.pythonanywhere.com',
+            },
         })
         .then((response)=>{
             this.setState({job:response.data}); 

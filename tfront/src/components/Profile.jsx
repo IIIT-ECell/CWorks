@@ -25,6 +25,7 @@ class Profile extends Component {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Token ' + localStorage["user_key"],
+        'Access-Control-Allow-Origin':'https://abhigyanghosh30.pythonanywhere.com',
       }
     })
     .then((response)=>{
@@ -32,6 +33,10 @@ class Profile extends Component {
       axios({
         method: 'GET',
         url: 'https://abhigyanghosh30.pythonanywhere.com/api/users/users/' + response.data.pk,
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin':'https://abhigyanghosh30.pythonanywhere.com',
+        },
       })
       .then((res)=>{
         console.log(res);
@@ -50,6 +55,10 @@ class Profile extends Component {
         axios({
           method: 'GET',
           url: 'https://abhigyanghosh30.pythonanywhere.com/api/users/stutest/' + localStorage["pk"],
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin':'https://abhigyanghosh30.pythonanywhere.com',
+          },
         })
         .then((res)=>{
           let temp_user = this.state.user;
@@ -64,6 +73,10 @@ class Profile extends Component {
         axios({
           method: 'GET',
           url: 'https://abhigyanghosh30.pythonanywhere.com/api/users/comptest/' + response.data.pk,
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin':'https://abhigyanghosh30.pythonanywhere.com',
+          },
         })
         .then((res)=>{
           let temp_user = this.state.user;

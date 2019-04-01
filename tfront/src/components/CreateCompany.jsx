@@ -38,6 +38,10 @@ class CreateCompany extends Component {
                 email: this.formData['email'],
                 password1: this.formData['password1'],
                 password2: this.formData['password2'],
+            },
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin':'https://abhigyanghosh30.pythonanywhere.com',
             }
         })
         .then(response => {
@@ -50,7 +54,8 @@ class CreateCompany extends Component {
 						url: "https://abhigyanghosh30.pythonanywhere.com/api/rest-auth/user",
                         headers: {
                             'Content-Type': 'application/json',
-                            'Authorization': 'Token ' + response.data.key
+                            'Authorization': 'Token ' + response.data.key,
+                            'Access-Control-Allow-Origin':'https://abhigyanghosh30.pythonanywhere.com',
                         }
                     })
                     .then(response => {
@@ -67,6 +72,10 @@ class CreateCompany extends Component {
                                 additional_poc: this.formData.additional_poc,
                                 user: response.data.pk,
                                 email: this.formData['email']
+                            },
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Access-Control-Allow-Origin':'https://abhigyanghosh30.pythonanywhere.com',
                             }
                         })
                         .then(response => {
@@ -89,6 +98,10 @@ class CreateCompany extends Component {
                                 user_type: 2,
                                 name: this.formData.name,
                                 phone_number: this.formData.phone_number,
+                            },
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Access-Control-Allow-Origin':'https://abhigyanghosh30.pythonanywhere.com',
                             }
                         })
 

@@ -19,6 +19,10 @@ class Home extends Component {
     axios({
       method: 'get',
       url: 'https://abhigyanghosh30.pythonanywhere.com/api/users/jobs/',
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin':'https://abhigyanghosh30.pythonanywhere.com',
+      },
     })
     .then((response)=>{
       console.log(response);

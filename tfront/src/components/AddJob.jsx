@@ -17,6 +17,10 @@ class AddJob extends Component{
         axios({
             method:'GET',
             url: "https://abhigyanghosh30.pythonanywhere.com/api/users/comptest/"+localStorage['pk']+"/",
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin':'https://abhigyanghosh30.pythonanywhere.com',
+            }
         })
         .then((response)=>{
             console.log(response.data[0]);
@@ -49,6 +53,7 @@ class AddJob extends Component{
             },
             headers: {
                 'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin':'https://abhigyanghosh30.pythonanywhere.com',
             }
         })
         .then((response)=>{

@@ -22,6 +22,7 @@ class EditCompany extends Component{
             headers: {
               'Content-Type': 'application/json',
               'Authorization': 'Token ' + localStorage["user_key"],
+              'Access-Control-Allow-Origin':'https://abhigyanghosh30.pythonanywhere.com',
             }
         })
         .then((response)=>{
@@ -29,6 +30,10 @@ class EditCompany extends Component{
             axios({
                 method: 'GET',
                 url: 'https://abhigyanghosh30.pythonanywhere.com/api/users/users/' + response.data.pk,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin':'https://abhigyanghosh30.pythonanywhere.com',
+                },
             })
             .then((response)=>{
                 console.log(response.data);
@@ -42,6 +47,10 @@ class EditCompany extends Component{
                 axios({
                     method: 'GET',
                     url: 'https://abhigyanghosh30.pythonanywhere.com/api/users/comptest/' + response.data.id,
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin':'https://abhigyanghosh30.pythonanywhere.com',
+                    },
                 })
                 .then((response)=>{
                     console.log(response.data);
@@ -81,7 +90,11 @@ class EditCompany extends Component{
                 about: this.state.user.about,
                 additional_poc: this.state.user.additional_poc,
                 user:localStorage["pk"],
-            }
+            },
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin':'https://abhigyanghosh30.pythonanywhere.com',
+            },
         })
         .then((response)=>{
             this.props.history.push('/profile');
