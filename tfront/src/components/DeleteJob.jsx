@@ -15,7 +15,7 @@ class DeleteJob extends Component{
         if(this.state.job.company_id==localStorage["pk"]){
             axios({
                 method:'DELETE',
-                url:"http://abhigyanghosh30.pythonanywhere.com/api/users/jobs/"+this.props.match.params.id,
+                url:"https://abhigyanghosh30.pythonanywhere.com/api/users/jobs/"+this.props.match.params.id,
             })
             .then((response)=>{
                 this.props.history.push("/jobs");
@@ -28,7 +28,7 @@ class DeleteJob extends Component{
     componentWillMount(){
         axios({
             method:'GET',
-            url:"http://abhigyanghosh30.pythonanywhere.com/api/users/jobs/"+this.props.match.params.id,
+            url:"https://abhigyanghosh30.pythonanywhere.com/api/users/jobs/"+this.props.match.params.id,
         })
         .then((response)=>{
             this.setState({job:response.data}); 

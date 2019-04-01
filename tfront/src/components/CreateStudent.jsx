@@ -35,7 +35,7 @@ class CreateStudent extends Component {
         // console.log(fd1);
         axios({
             method:"POST",
-			url:"http://abhigyanghosh30.pythonanywhere.com/api/rest-auth/registration/",
+			url:"https://abhigyanghosh30.pythonanywhere.com/api/rest-auth/registration/",
             data:{
                 username: this.formData['username'],
                 email: this.formData['email'],
@@ -50,7 +50,7 @@ class CreateStudent extends Component {
                 localStorage["user_key"]=response.data.key;
                 axios({
                         method: "GET",
-						url: "http://abhigyanghosh30.pythonanywhere.com/api/rest-auth/user",
+						url: "https://abhigyanghosh30.pythonanywhere.com/api/rest-auth/user",
                         headers: {
                             'Content-Type': 'application/json',
                             'Authorization': 'Token ' + response.data.key
@@ -60,7 +60,7 @@ class CreateStudent extends Component {
                     localStorage["pk"]=response.data.pk;
                     axios({
                         method: 'POST',
-						url: "http://abhigyanghosh30.pythonanywhere.com/api/users/students/",
+						url: "https://abhigyanghosh30.pythonanywhere.com/api/users/students/",
                         data: {
                             student_id: this.formData.student_id,
                             gender: this.formData.gender,
@@ -81,7 +81,7 @@ class CreateStudent extends Component {
                     })
                     axios({
                         method:"PUT",
-						url: "http://abhigyanghosh30.pythonanywhere.com/api/users/users/"+response.data.pk+"/",
+						url: "https://abhigyanghosh30.pythonanywhere.com/api/users/users/"+response.data.pk+"/",
                         headers: {
                             'Content-Type': 'application/json',
                         },

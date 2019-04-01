@@ -28,7 +28,7 @@ class EditJob extends Component{
         console.log(this.state.formData);
         axios({
             method: 'PUT',
-            url: "http://abhigyanghosh30.pythonanywhere.com/api/users/jobs/"+this.props.match.params.id+"/",
+            url: "https://abhigyanghosh30.pythonanywhere.com/api/users/jobs/"+this.props.match.params.id+"/",
             data:{
                 id: this.state.formData.id,
                 job_name: this.state.formData.job_name,
@@ -59,7 +59,7 @@ class EditJob extends Component{
         console.log(id);
         axios({
             method:"GET",
-            url:"http://abhigyanghosh30.pythonanywhere.com/api/users/jobs/"+id,
+            url:"https://abhigyanghosh30.pythonanywhere.com/api/users/jobs/"+id,
         })
         .then((response)=>{
             console.log(response.data);
@@ -73,7 +73,7 @@ class EditJob extends Component{
     componentWillMount(){
         axios({
             method:"GET",
-            url:"http://abhigyanghosh30.pythonanywhere.com/api/users/comptest/"+localStorage["pk"]+"/",
+            url:"https://abhigyanghosh30.pythonanywhere.com/api/users/comptest/"+localStorage["pk"]+"/",
         })
         .then((resp)=>{ 
             this.setState({compData:resp.data[0]}); 

@@ -18,7 +18,7 @@ class EditCompany extends Component{
     componentDidMount(){
         axios({
             method: 'GET',
-            url: 'http://abhigyanghosh30.pythonanywhere.com/api/rest-auth/user',
+            url: 'https://abhigyanghosh30.pythonanywhere.com/api/rest-auth/user',
             headers: {
               'Content-Type': 'application/json',
               'Authorization': 'Token ' + localStorage["user_key"],
@@ -28,7 +28,7 @@ class EditCompany extends Component{
             console.log(response);
             axios({
                 method: 'GET',
-                url: 'http://abhigyanghosh30.pythonanywhere.com/api/users/users/' + response.data.pk,
+                url: 'https://abhigyanghosh30.pythonanywhere.com/api/users/users/' + response.data.pk,
             })
             .then((response)=>{
                 console.log(response.data);
@@ -41,7 +41,7 @@ class EditCompany extends Component{
 
                 axios({
                     method: 'GET',
-                    url: 'http://abhigyanghosh30.pythonanywhere.com/api/users/comptest/' + response.data.id,
+                    url: 'https://abhigyanghosh30.pythonanywhere.com/api/users/comptest/' + response.data.id,
                 })
                 .then((response)=>{
                     console.log(response.data);
@@ -73,7 +73,7 @@ class EditCompany extends Component{
         console.log(localStorage["pk"]);
         axios({
             method:"PUT",
-            url:"http://abhigyanghosh30.pythonanywhere.com/api/users/companies/"+this.state.user.id+"/",
+            url:"https://abhigyanghosh30.pythonanywhere.com/api/users/companies/"+this.state.user.id+"/",
             data:{
                 id:this.state.user.id,
                 name: this.state.user.name,

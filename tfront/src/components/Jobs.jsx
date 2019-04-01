@@ -41,7 +41,7 @@ class Home extends Component {
   componentDidMount(){
     axios({
       method: 'get',
-      url: 'http://abhigyanghosh30.pythonanywhere.com/api/users/jobs/',
+      url: 'https://abhigyanghosh30.pythonanywhere.com/api/users/jobs/',
     })
     .then((response)=>{
       console.log(response.data);
@@ -50,7 +50,7 @@ class Home extends Component {
       for(let i in this.state.jobs){
         axios({
           method: 'get',
-          url: 'http://abhigyanghosh30.pythonanywhere.com/api/users/companies/'+ this.state.jobs[i].company_id +'/',
+          url: 'https://abhigyanghosh30.pythonanywhere.com/api/users/companies/'+ this.state.jobs[i].company_id +'/',
         })
         .then((res)=>{
           let temp_jobs = this.state.jobs;

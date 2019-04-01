@@ -14,7 +14,7 @@ class Login extends Component {
     event.preventDefault();
 
     axios
-      .post("http://abhigyanghosh30.pythonanywhere.com/api/rest-auth/logout/")
+      .post("https://abhigyanghosh30.pythonanywhere.com/api/rest-auth/logout/")
       .then( response => {
         console.log(response);
         return response;

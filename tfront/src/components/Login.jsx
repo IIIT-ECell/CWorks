@@ -37,9 +37,15 @@ class Login extends Component {
         fd.append("username", this.formData.username);
         fd.append("password", this.formData.password);
 
-        axios.post(
-            "http://abhigyanghosh30.pythonanywhere.com/api/rest-auth/login/",
-            fd
+        axios({
+            method:"POST",
+            url:"https://abhigyanghosh30.pythonanywhere.com/api/rest-auth/login/",
+            data:fd,
+            headers:{
+                'Access-Control-Allow-Origin':'https://abhigyanghosh30.pythonanywhere.com',
+            }
+
+        }
         ).then( response => {
             console.log(response);
             return response;
@@ -51,8 +57,9 @@ class Login extends Component {
                 console.log("While logging in:");
                 axios({
                     method: "GET",
-                    url: "http://abhigyanghosh30.pythonanywhere.com/api/rest-auth/user",
+                    url: "https://abhigyanghosh30.pythonanywhere.com/api/rest-auth/user",
                     headers: {
+                        'Access-Control-Allow-Origin':'https://abhigyanghosh30.pythonanywhere.com',
                         'Content-Type': 'application/json',
                         'Authorization': 'Token ' + response.data.key
                     }
@@ -61,9 +68,10 @@ class Login extends Component {
                     console.log(res.data);
                     axios({
                         method: "GET",
-                        url: "http://abhigyanghosh30.pythonanywhere.com/api/users/users/"+res.data.pk+"/",
+                        url: "https://abhigyanghosh30.pythonanywhere.com/api/users/users/"+res.data.pk+"/",
                         headers: {
                             'Content-Type': 'application/json',
+                            'Access-Control-Allow-Origin':'https://abhigyanghosh30.pythonanywhere.com',
                         }
                     }).then((resp)=>{
                         console.log(resp);
