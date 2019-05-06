@@ -40,7 +40,7 @@ class App extends Component {
         <Router>
           <div>
             <nav className='navbar navbar-expand-md'>
-              <Link to='/home' className='navbar-brand'>Campus Works</Link>
+              <Link to='/home' className='navbar-brand'>Internship Fair</Link>
               <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
               </button>
