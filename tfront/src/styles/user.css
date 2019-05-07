@@ -1,11 +1,12 @@
 .profile {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-  max-height: 300px;
+    max-height: 300px;
 }
 
 .profile img {
-  margin: 0;
+    margin: 0;
 }
+

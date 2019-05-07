@@ -90,7 +90,7 @@ class Profile extends Component {
   }
 
   render() {
-    if(localStorage["user_type"]==1){
+    if(localStorage["user_type"] == 1) {
       return (
         <div>
           {console.log(this.state)}
@@ -111,8 +111,7 @@ class Profile extends Component {
           </div>
         </div>
       );
-    }
-    else{
+    } else if(localStorage["user_type"] == 2) {
       return (
         <div>
           {console.log(this.state)}
@@ -133,6 +132,8 @@ class Profile extends Component {
           </div>
         </div>
       );
+    } else {
+      return <Redirect to="/home" />;
     }
   }
 }

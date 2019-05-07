@@ -6,19 +6,19 @@ import "../styles/register.css";
 
 class Register extends Component {
   render() {
-    if (localStorage["user_key"] && localStorage["isLoggedIn"]==="true") {
+    if (localStorage["user_key"] && localStorage["isLoggedIn"] === "true") {
       return <Redirect to="/home" />
     }
+
     return (
-      <div className="row p-5">
-        <div className="col-sm-12 text-center">
-          <h1>Register as:</h1>
-        </div>
-        <div className="col-md-6 text-center">
-          <button className="btn btn-info"><Link to='/register/student' className="text-white"><h1>Student</h1></Link></button>
-        </div>
-        <div className="col-md-6 text-center">
-          <button className="btn btn-info"><Link to='/register/company' className="text-white"><h1>Company</h1></Link></button>
+      <div className="trial">
+        <h1 className="text-center">Register as:</h1>
+
+        <div className="mb-5"></div>
+
+        <div className="row">
+            <div className="col-md-6 col-sm-12 mb-2"><Link to='/register/student' className='btn btn-primary btn-block'>Student</Link></div>
+            <div className="col-md-6 col-sm-12"><Link to='/register/company' className='btn btn-primary btn-block'>Company</Link></div>
         </div>
       </div>
     );

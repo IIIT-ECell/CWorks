@@ -1,5 +1,6 @@
 {
   "name": "tfront",
+  "homepage": "https://ecell.iiit.ac.in/internshipfair",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

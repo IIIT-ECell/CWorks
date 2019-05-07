@@ -34,25 +34,36 @@ library.add(faPlus);
 
 class App extends Component {
   render() {
+    console.log(localStorage["isLoggedIn"]);
     return (
       <div className="App">
         <Router>
           <div>
             <nav className='navbar navbar-expand-md'>
-              <Link to='/home' className='navbar-brand'>Campus Works</Link>
+              <Link to='/home' className='navbar-brand'>Internship Fair</Link>
               <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
               </button>
               <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <Link to='/login' className='nav-item nav-link'>Login</Link>
+
+                {
+                  localStorage["isLoggedIn"] === "false" &&
+                    <Link to='/login' className='nav-item nav-link'>Login</Link>
+                }
+
                 <Link to='/register' className='nav-item nav-link'>Register</Link>
                 <Link to='/home' className='nav-item nav-link'>Home</Link>
                 <Link to='/jobs' className='nav-item nav-link'>Jobs</Link>
                 <Link to='/profile' className='nav-item nav-link'>Profile</Link>
-                <Link to='/logout' className='nav-item nav-link'>Logout</Link>
+
+                {
+                  localStorage["isLoggedIn"] === "true" &&
+                    <Link to='/logout' className='nav-item nav-link'>Logout</Link>
+                }
+
               </div>
             </nav>
-            <div className="container">
+            <div className="container centered">
               <Switch>
                 <Route exact path='/' component={Login} />
                 <Route exact path='/login' component={Login} />
